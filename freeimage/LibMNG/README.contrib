@@ -1,0 +1,66 @@
+The contrib directory contains contributions made by fellow enthousiasts.
+(Check the web-sites for the latest versions)
+
+----------------------------------------------------------------------
+
+mngplg - A Netscape plugin for MNG - by Jason Summers
+
+http://pobox.com/~jason1/imaging/mngplg/
+
+The very first contribution, and what a start!
+GIF look out, MNG is on the prowl and ready to swat you like a fly!
+
+----------------------------------------------------------------------
+
+mngplay - An SDL based MNG viewer - by Ralph Giles
+
+http://snow.ashlu.bc.ca/~giles/mng/
+
+Another nice contribution. View MNG files on practically any platform
+with this standalone viewer.
+Source-code only; Requires SDL library and libmng.so
+
+----------------------------------------------------------------------
+
+mngview - A BCB port of the Delphi sample - by Andy Protano
+
+I have added this nice little port to the BCB samples directory.
+It adds a nifty progressbar while reading a file. Excellent work!
+Requires libmng.dll
+(note: this is in the BCB samples directory)
+
+----------------------------------------------------------------------
+
+mngdump - A BCB GUI-based dump utility - by Andy Protano
+
+Andy has sent me this fully functional MNG dump utility, that gives
+detailed information of the contents of any MNG file.
+Requires libmng.dll
+
+----------------------------------------------------------------------
+
+mng-view - A GTK-based MNG viewer - by Vova Babin
+
+Vova has been hacking away with the libmng code and has come up with
+this nice little sample how to write a MNG viewer using GTK.
+Thanks mate!
+Source-code only
+Requires GTK+ (1.2 or higher) and libmng (0.9.2 or higher)
+
+----------------------------------------------------------------------
+
+mngview - Another MNG viewer; this one for MSVC - by Nicholaus Brennig
+
+A welcome contribution from Nicholaus. Author of SlowView. A very nice
+image-handling utility for Windows. A welcome contribution since there
+have been numerous questions about linking libmng with MSVC.
+Well, look no further. Here it is!
+
+----------------------------------------------------------------------
+
+MSVC libmng project - A MSVC project to build libmng.dll - by Chad Austin
+
+Chad has contributed some project-files that you could use to build
+libmng.dll with MSVC. Please be sure to read the README file included.
+
+----------------------------------------------------------------------

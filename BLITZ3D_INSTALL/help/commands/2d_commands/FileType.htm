@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>FileType (filename$)</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+filename$ = any valid variable with path/filename
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+This command checks the filename you pass and determines if it exists and  whether or not it is a valid filename or if it is a directory. Here are the  values it returns:<br />
+<br />
+1 = The filename exists<br />
+0 = The filename doesn't exist<br />
+2 = The filename is not a file - but a directory<br />
+<br />
+Use this to validate that a file exists before you do something to it.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/FileType.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; Windows 9x users will need to change location of calc.exe<br />
+<br />
+filename$="c:winntsystem32calc.exe"<br />
+<br />
+if fileType(filename$)=1 then Print "The file exists!"<br />
+if fileType(filename$)=0 then Print "File not found!"<br />
+if fileType(filename$)=2 then Print "This is a directory!"<br />
+<br />
+Print "Press any key to quit."<br />
+<br />
+WaitKey()
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=FileType&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

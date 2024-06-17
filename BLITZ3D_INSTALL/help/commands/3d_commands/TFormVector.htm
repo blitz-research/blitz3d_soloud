@@ -1,0 +1,90 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>TFormVector x#, y#, z#, source_entity, dest_entity</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+x#, y#, z# = components of a vector in 3d space<br />
+<br />
+source_entity = handle of source entity, or 0 for 3d world<br />
+dest_entity = handle of destination entity, or 0 for 3d world
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+Transforms between coordinate systems. After using TFormVector the new<br />
+components can be read with TFormedX(), TFormedY() and TFormedZ(). <br />
+<br />
+<br />
+See EntityX() for details about local coordinates.<br />
+<br />
+<br />
+Similar to TFormPoint, but operates on a vector. A vector can be thought of<br />
+as 'displacement relative to current location'.<br />
+<br />
+For example, vector (1,2,3) means one step to the right, two steps up <br />
+and three steps forward. <br />
+<br />
+This is analogous to PositionEntity and MoveEntity:<br />
+<br />
+PositionEntity entity, x,y,z   ; put entity at point (x,y,z)<br />
+<br />
+MoveEntity entity, x,y,z       ; add vector (x,y,z) to current position
+</td>
+</tr>
+</table>
+<h1><a href=../3d_examples/TFormVector.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; TFormVector example<br />
+<br />
+Graphics3D 640, 480<br />
+<br />
+p = CreatePivot()<br />
+<br />
+PositionEntity p, 10, 20, 30   ; easy to visualize<br />
+TurnEntity p, -5, -15, 25      ; hard to visualize<br />
+<br />
+; Question: what would happen if we took one step 'forward'?<br />
+; The local vector corresponding to one step forward is (0,0,1)<br />
+; in the pivot's local space. We need the global version.<br />
+<br />
+TFormVector 0,0,1, p,0    ;  transform from pivot to world<br />
+<br />
+message$ = "'One step forward' vector is  ( "<br />
+message = message + TFormedX() + ",  " + TFormedY() + ",  " + TFormedZ() + " )"<br />
+<br />
+Text 70, 180, message<br />
+<br />
+; Now actually take the step. The new location should be<br />
+; (10,20,30) plus the vector we just computed.<br />
+<br />
+MoveEntity p, 0,0,1<br />
+<br />
+message$ = "New location of pivot is  ( "<br />
+message = message + EntityX(p) + ",  "<br />
+message = message + EntityY(p) + ",  " + EntityZ(p) + " )"<br />
+<br />
+Text 100, 210, message<br />
+<br />
+Flip<br />
+<br />
+WaitKey()<br />
+End
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=TFormVector&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

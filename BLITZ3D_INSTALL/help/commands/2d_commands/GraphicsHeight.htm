@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>GraphicsHeight()</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+None
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+This command will tell you the height, in pixels, of the current graphics  mode.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/GraphicsHeight.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; GraphicsWidth(), GraphicsHeight(), GraphicsDepth(), GraphicsBuffer() example<br />
+<br />
+; Set a graphics mode and buffer<br />
+Graphics 640,480,16<br />
+SetBuffer FrontBuffer()<br />
+<br />
+; Print the details<br />
+Print "Screen width is: " + GraphicsWidth()<br />
+Print "Screen height is: " + GraphicsHeight()<br />
+Print "Screen color depth is: " + GraphicsDepth()<br />
+Print "Current buffer handle is: " + GraphicsBuffer()<br />
+<br />
+; Wait for ESC before exiting<br />
+While Not KeyHit(1)<br />
+Wend<br />
+
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=GraphicsHeight&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>MouseYSpeed()</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+None.
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+Often you'd like to find the difference between where the mouse WAS to where it is NOW. You can use this command and MouseYSpeed() in pairs to find out the changes in the mouse location between calls. <br />
+<br />
+You really have to use these commands TWICE to get anything out of them. Each call you make returns the difference in location since the LAST time you called it. <br />
+<br />
+In this example it's called every loop and therefore allows you to have infinite mouse movement without the screen size restrictions.
+<br>
+<br>
+See also: <a class=small href=MouseXSpeed.htm>MouseXSpeed</a>.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/MouseYSpeed.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+Graphics 640,480<br />
+<br />
+SetBuffer BackBuffer()<br />
+<br />
+x=320<br />
+y=240<br />
+<br />
+; infinite mouse movement<br />
+<br />
+Repeat<br />
+Cls<br />
+<br />
+xs=MouseXSpeed() ; see how far the mouse has been moved<br />
+ys=MouseYSpeed()<br />
+MoveMouse 320,240 ;put the mouse back in the middle of the screen<br />
+<br />
+x=x+xs ;adjust mouse co-ords<br />
+y=y+ys<br />
+<br />
+If x>GraphicsWidth()-1 Then x=x-GraphicsWidth() ;wrap screen<br />
+If x<0 Then x=x+GraphicsWidth()<br />
+If y<0 Then y=y+GraphicsHeight()<br />
+If y>GraphicsHeight()-1 Then y=y-GraphicsHeight()<br />
+<br />
+Text x,y,"X",True,True<br />
+<br />
+Flip<br />
+<br />
+Until KeyHit(1)<br />
+<br />
+End
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=MouseYSpeed&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

@@ -1,0 +1,106 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>Sin# ( degrees# )</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+degrees# = angle in degrees.
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+Sine of an angle. The angle is measured in degrees. <br />
+<br />
+For angles between 0 and 90 degrees this is defined by the sides of a right triangle. The sine is the side opposite the angle divided by the hypotenuse. <br />
+<br />
+Outside of 0 to 90 the definition uses a circle with radius=1. The angle is placed at the center of the circle, with one side on the positive x-axis. The other side hits the circle at some point. The y coordinate of this point is the sine of the angle. <br />
+<br />
+The positive y-axis corresonds to +90 degrees. This is a common source of confusion in Blitz. With screen coordinates ( pixels ) the y-axis points downward. But in the 3d world the y-axis typically points upward. <br />
+<br />
+Another possible snag is the size of the angle. In principle, the sine function repeats every 360 degrees. So Sin(-360), Sin(0), Sin(360), Sin(720) etc. should all be exactly the same. But in practice the accuracy decreases as the angle gets farther away from zero. <br />
+<br />
+See also ASin, Cos, ACos, Tan, Atan, ATan2
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/Sin.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; Sin / Cos / Tan example. <br />
+<br />
+; Left/Right arrow keys change angle. Escape quits. <br />
+<br />
+Const width = 640, height = 480 <br />
+Const radius# = .2 * height <br />
+Const KEY_ESC = 1, KEY_LEFT = 203, KEY_RIGHT = 205 <br />
+<br />
+Graphics width, height <br />
+SetBuffer BackBuffer( ) <br />
+Origin width / 3, height / 2 <br />
+<br />
+angle# = 0.0 <br />
+<br />
+While Not KeyDown( KEY_ESC ) <br />
+<br />
+; NOTE: It is usually best to avoid very large angles. <br />
+; The 'If angle...' lines show one way to do this. <br />
+; Mod is another possibility. <br />
+<br />
+If KeyDown( KEY_LEFT ) Then angle = angle - .5 <br />
+; If angle < 0.0 Then angle = angle + 360 <br />
+<br />
+If KeyDown( KEY_RIGHT ) Then angle = angle + .5 <br />
+; If angle >= 360.0 Then angle = angle - 360 <br />
+<br />
+Cls <br />
+<br />
+Color 80, 80, 0 ; pale yellow circle <br />
+Oval -radius, -radius, 2 * radius, 2 * radius, False <br />
+<br />
+For a# = 0.0 To Abs( angle Mod 360 ) Step .5 <br />
+<br />
+x# = radius * Cos( a ) ; (x,y) is a point on the circle <br />
+y# = radius * Sin( a ) ; corresponding to angle a. <br />
+<br />
+If ( angle Mod 360 < 0 ) Then y = -y ; reverse for negative angle <br />
+WritePixel x, y, $ffff00 ; bright yellow <br />
+<br />
+Next <br />
+<br />
+Color 255, 255, 0 ; yellow <br />
+Line 0, 0, radius * Cos( angle ), radius * Sin( angle ) <br />
+<br />
+Color 0, 255, 0 ; green <br />
+Line 0, 0, radius * Cos( angle ), 0 <br />
+Text radius * 1.5, 10, "Cos( angle ) = " + Cos( angle ) <br />
+<br />
+Color 255, 0, 0 ; red <br />
+Line radius * Cos( angle ), 0, radius * Cos( angle ), radius * Sin( angle ) <br />
+Text radius * 1.5, -10, "Sin( angle ) = " + Sin( angle ) <br />
+<br />
+Color 255, 255, 255 <br />
+Text radius * 1.5, -30, " angle = " + angle <br />
+Text radius * 1.5, 30, "Tan( angle ) = " + Tan( angle ) <br />
+<br />
+Flip <br />
+<br />
+Wend <br />
+<br />
+End
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=Sin&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

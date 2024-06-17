@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>Text x,y,string$,[center x],[center y]</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+x = starting x coordinate to print text<br />
+y = starting 4 coordinate to print text<br />
+string$ = string/text to print<br />
+center x = optional; true = center horizontally<br />
+center y = optional; true = center vertically 
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+Prints a string at the designated screen coordinates. You can center the  text on the coordiates by setting center x/center y to TRUE. This draws the  text in the current drawing color.<br />
+<br />
+Note: Printing a space with text will NOT render a block - a space is an empty  value. So printing " " will not make a box appear.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/Text.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; Text example<br />
+<br />
+; enable graphics mode<br />
+Graphics 800,600,16<br />
+<br />
+; wait for ESC key before ending<br />
+While Not KeyHit(1)<br />
+;print the text, centered horizontally at x=400, y=0<br />
+Text 400,0,"Hello There!",True,False<br />
+Wend<br />
+
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=Text&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

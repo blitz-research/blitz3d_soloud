@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>ACos# ( c# )</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+c = a number in the range -1 to +1.<br />
+<br />
+It is considered to be the cosine of an angle.
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+ACos( c ) is an angle which has cosine = c.<br />
+It is in the range 0 to +180 degrees.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/ACos.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; ACos example<br />
+<br />
+; NaN means "Not a Number", the numerical result is invalid.<br />
+<br />
+Const width = 640, height = 480<br />
+<br />
+Graphics width, height<br />
+<br />
+<br />
+Local C#, AC#   ; Cos and ACos<br />
+<br />
+Print "    C    ACos( C )"<br />
+Print "=================="<br />
+<br />
+For n = -11 To 11<br />
+<br />
+C = n / 10.0<br />
+AC = ACos( C ) <br />
+Print RSet(C, 6) + RSet( AC, 10)<br />
+<br />
+Next<br />
+<br />
+WaitKey()  :  End
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=ACos&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

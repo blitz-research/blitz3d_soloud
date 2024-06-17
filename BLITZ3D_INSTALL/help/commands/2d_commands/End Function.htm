@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>End Function</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+None.
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+This line terminates a FUNCTION structure. Upon  reaching this line, Blitz will branch program execution to the next command  following the original call to the function. See the  FUNCTION command for more information.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/End Function.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; End Function Example<br />
+<br />
+; Get the user's name<br />
+name$=Input$("Enter Your Name:")<br />
+<br />
+; Call a function to print how many letters the name has<br />
+numletters(name$);<br />
+<br />
+;The program basically ends here, because functions don't run unless called.<br />
+<br />
+; The actual function<br />
+Function numletters(passedname$)<br />
+Print "Your name has " + Len(passedname$) + " letters in it."<br />
+End Function<br />
+
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=End Function&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>TCPTimeouts read_millis,accept_millis</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+read_millis - milliseconds value<br />
+accept_millis - milliseconds value 
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+read_millis allows you to control how long reading data into a TCP stream  can take before causing an error. By default, this is set to 10,000 (10 seconds).  This means that if data takes longer than 10 seconds to arrive, an error occurs  and the stream can not be used any more.<br />
+<br />
+accept_millis allows you to control how the AcceptTCPStream()  function will wait for a new connection. By default, this value is 0, so AcceptTCPStream() will return immediately  if there is no new connection available.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/TCPTimeouts.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+None.<br />
+
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=TCPTimeouts&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

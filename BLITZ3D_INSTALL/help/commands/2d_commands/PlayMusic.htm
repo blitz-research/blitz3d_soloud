@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>PlayMusic (filename$)</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+filename$ - name of music file. Formats supported:  raw/mod/s3m/xm/it/mid/rmi/wav/mp2/mp3/ogg/wma/asf
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+This command will load and play a music file.<br />
+<br />
+You MUST use a channel variable  in order to stop or adjust the music playing. You may use StopChannel, PauseChannel, ResumeChannel, etc. with this command.<br />
+<br />
+You can't 'preload' the audio like you can a sound sample via the LoadSound command. Every time you call the PlayMusic  command, the file is reloaded and played. This means that if you use the command  while some graphics are moving on-screen, you may get a slight pause when the  hard drive seeks and grabs the music file. To avoid this, you might want to  use the PlaySound/LoopSound  commands instead.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/PlayMusic.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; Load and play the background music<br />
+<br />
+chnBackground=PlayMusic("music\background.wav")
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=PlayMusic&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

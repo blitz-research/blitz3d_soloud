@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>WriteBytes bank,filehandle/stream,offset,count</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+bank = variable containing handle to valid bank<br />
+filehandle/stream = a valid variable set with the WriteFile or OpenTCPStream  (v1.52+)<br />
+offset = offset in bytes to write the value<br />
+count = how many bytes to write from the offset
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+You can write the contents of a memory bank to a file on disk (or stream)  using this command.<br />
+<br />
+Note: The file handle must be opened with WriteFile  or OpenTCPStream and subsequently closed with CloseFile or CloseTCPStream  after the writing operations are complete.<br />
+Return how many bytes successfully written to a stream.<br />
+<br />
+Streams can only be used in Blitz Basic v1.52 or greater.
+<br>
+<br>
+See also: <a class=small href=ReadBytes.htm>ReadBytes</a>.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/WriteBytes.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; Read/WriteBytes Commands Example<br />
+<br />
+; Create a 50 byte memory bank<br />
+bnkTest=CreateBank(500)<br />
+<br />
+; Let's fill the bank with random data<br />
+For t = 1 To 50<br />
+<br />
+	PokeByte bnkTest,t,Rnd(255)<br />
+	<br />
+Next<br />
+<br />
+; Open a file to write to<br />
+fileBank=WriteFile("test.bnk")<br />
+; Write the bank to the file<br />
+WriteBytes bnkTest,fileBank,0,50<br />
+; Close it<br />
+CloseFile fileBank<br />
+<br />
+; Free the bank<br />
+FreeBank bnkTest<br />
+<br />
+; Make a new one<br />
+bnkTest=CreateBank(500)<br />
+<br />
+; Open the file to read from<br />
+fileBank=OpenFile("test.bnk")<br />
+; Write the bank to the file<br />
+ReadBytes bnkTest,fileBank,0,50<br />
+; Close it<br />
+CloseFile fileBank<br />
+<br />
+; Write back the results!<br />
+For t = 1 To 50<br />
+	<br />
+	Print PeekByte (bnkTest,t)<br />
+<br />
+Next
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=WriteBytes&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

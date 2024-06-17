@@ -1,0 +1,95 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>CreateBrush ( [red#][,green#][,blue#] )</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+red# (optional) - brush red value<br />
+green# (optional) - brush green value<br />
+blue# (optional) - brush blue value
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+Creates a brush and returns a brush handle.<br />
+<br />
+The optional green, red and  blue values allow you to set the colour of the brush. Values should be in the  range 0-255. If omitted the values default to 255.<br />
+<br />
+A brush is a collection of properties such as Colour, Alpha, Shininess, Texture  etc that are all stored as part of the brush. Then, all these properties can  be applied to an entity, mesh or surface at once just by using PaintEntity, PaintMesh  or PaintSurface. <br />
+<br />
+When creating your own mesh, if you wish for certain surfaces to look differently  from one another, then you will need to use brushes to paint individual surfaces.  Using commands such as EntityColor, EntityAlpha will apply the effect to all  surfaces at once, which may not be what you wish to achieve. <br />
+<br />
+See also: LoadBrush.
+</td>
+</tr>
+</table>
+<h1><a href=../3d_examples/CreateBrush.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; CreateBrush Example<br />
+; -------------------<br />
+<br />
+Graphics3D 640,480<br />
+SetBuffer BackBuffer()<br />
+<br />
+camera=CreateCamera()<br />
+<br />
+light=CreateLight()<br />
+RotateEntity light,90,0,0<br />
+<br />
+cube=CreateCube()<br />
+PositionEntity cube,0,0,5<br />
+<br />
+; Load texture<br />
+tex=LoadTexture("media/b3dlogo.jpg")<br />
+<br />
+; Create brush<br />
+brush=CreateBrush()<br />
+<br />
+; Apply texture to brush<br />
+BrushTexture brush,tex<br />
+<br />
+; And some shininess<br />
+BrushShininess brush,1 <br />
+<br />
+; Paint mesh with brush<br />
+PaintMesh cube,brush<br />
+<br />
+While Not KeyDown( 1 )<br />
+<br />
+pitch#=0<br />
+yaw#=0<br />
+roll#=0<br />
+<br />
+If KeyDown( 208 )=True Then pitch#=-1 <br />
+If KeyDown( 200 )=True Then pitch#=1<br />
+If KeyDown( 203 )=True Then yaw#=-1<br />
+If KeyDown( 205 )=True Then yaw#=1<br />
+If KeyDown( 45 )=True Then roll#=-1<br />
+If KeyDown( 44 )=True Then roll#=1<br />
+<br />
+TurnEntity cube,pitch#,yaw#,roll#<br />
+<br />
+RenderWorld<br />
+Flip<br />
+<br />
+Wend<br />
+<br />
+End
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=CreateBrush&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

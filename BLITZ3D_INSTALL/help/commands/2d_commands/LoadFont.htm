@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>LoadFont (fontname$[,height][,bold][,italic][,underlined])</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+fontname$ - name of font to be loaded, e.g. "arial"<br />
+height - height of font in points (default is 12)<br />
+bold - True to load bold version of font, False not to (default is False)<br />
+italic - True to load italic version of font, False not to (default is False)<br />
+underlined - True to load underlined version of font, False not to (default is False)
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+Loads a font and returns a font handle.<br />
+<br />
+You can then use the font handle  with commands such as SetFont and FreeFont. <br />
+<br />
+Note: Blitz doesn't work with SYMBOL fonts, like Webdings and WingDings.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/LoadFont.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; LoadFont/SetFont/FreeFont Example<br />
+; ---------------------------------<br />
+<br />
+; Enable Graphics mode<br />
+Graphics 800,600<br />
+<br />
+; Set global on font variables<br />
+Global fntArial,fntArialB,fntArialI,fntArialU<br />
+<br />
+; Load fonts to a file handle variables<br />
+fntArial=LoadFont("Arial",24)<br />
+fntArialB=LoadFont("Arial",18,True)<br />
+fntArialI=LoadFont("Arial",32,False,True)<br />
+fntArialU=LoadFont("Arial",14,False,False,True)<br />
+<br />
+; Set the font and print text<br />
+SetFont fntArial<br />
+Text 400,0,"This is just plain Arial 24 point",True<br />
+<br />
+SetFont fntArialB<br />
+Text 400,30,"This is bold Arial 18 point",True<br />
+<br />
+SetFont fntArialI<br />
+Text 400,60,"This is italic Arial 32 point",True<br />
+<br />
+SetFont fntArialU<br />
+Text 400,90,"This is underlined Arial 14 point",True<br />
+<br />
+; Standard 'wait for ESC' from user<br />
+While Not KeyHit(1)<br />
+Wend<br />
+<br />
+; Clear all the fonts from memory!<br />
+FreeFont fntArial<br />
+FreeFont fntArialB<br />
+FreeFont fntArialI<br />
+FreeFont fntArialU
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=LoadFont&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

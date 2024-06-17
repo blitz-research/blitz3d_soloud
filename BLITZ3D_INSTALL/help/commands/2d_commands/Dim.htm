@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>Dim array_name(index1[,index2][,index3][,...])</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+array_name - array name<br />
+index1 - index number of last variable to be created within that particular  index-range<br />
+index2 (optional) - index number of last variable to be created within that  particular index-range<br />
+index3 (optional) - index number of last variable to be created within that  particular index-range<br />
+... (optional) - and so on
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+Creates an array of the specified type. For example, Dim tiles(10) creates  an integer array, Dim tiles#(10) creates a float array and Dim tile$(10) creates  a string array.<br />
+<br />
+<br />
+The contents of an array can be accessed using the index notation:  0 - indexn, giving indexn+1 number of elements for that particular index range. You should not attempt to access a non-existent element of the array.  In debug mode this will cause an error stating 'index out of bounds'.  With debug off however, you may get 'illegal memory access' errors, or worse no immediate errors at all. <br />
+<br />
+Arrays are global, and must be defined in the main program. <br />
+<br />
+Arrays can be re-dimmed by using the Dim statement again with the same array  name, but the contents of the array will be lost.<br />
+<br />
+-----------------------------------------------------------<br />
+<br />
+*NEW* BLITZ ARRAYS *NEW*<br />
+<br />
+Since a recent Blitz update you can now do what are called 'blitz arrays'.  These are very different to a Dim'd array, in the following ways:<br />
+<br />
+They use square brackets [] instead of the normal round ones ().<br />
+<br />
+You declare them like you do Local or Global variables, example: Local myArray[10]<br />
+<br />
+They cannot be multi-dimensional, and cannot be resized.<br />
+<br />
+They can be stored in Type objects.<br />
+<br />
+They can be passed to functions.<br />
+<br />
+-----------------------------------------------------------
+<br>
+<br>
+See also: <a class=small href=Global.htm>Global</a>, <a class=small href=Local.htm>Local</a>.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/Dim.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; Dim Example<br />
+; Create a collection of 100 random numbers<br />
+<br />
+; Create array<br />
+Dim nums(99)<br />
+<br />
+; Fill each element with a random number<br />
+For i = 0 to 99<br />
+nums(i) = Rand(1,1000)<br />
+Next
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=Dim&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

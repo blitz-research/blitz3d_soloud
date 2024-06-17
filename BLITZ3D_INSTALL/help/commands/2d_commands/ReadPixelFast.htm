@@ -1,0 +1,101 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>ReadPixelFast (x,y,[buffer])</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+x - y-coordinate of pixel<br />
+y - y-coordinate of pixel<br />
+buffer (optional) - name of buffer to read colour value from, e.g. BackBuffer() 
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+Reads a color value from either the current buffer or the specified buffer,  and returns it.<br />
+<br />
+The returned colour value is in the form of an integer than  contains the alpha, red, green and blue values of the pixel. <br />
+<br />
+IMPORTANT: <br />
+<br />
+You *must* use this command on a locked buffer, otherwise the command will  fail. See LockBuffer. <br />
+<br />
+Also, you must make sure that the coordinates that you are reading from are  valid, otherwise you will end up reading garbage values. <br />
+<br />
+WARNING: <br />
+<br />
+By not following the above advice, you may cause your computer to crash. <br />
+<br />
+See also: GetColor, ReadPixel.  
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/ReadPixelFast.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; ReadPixelFast/WritePixeFast Example<br />
+; -----------------------------------<br />
+<br />
+Graphics 640,480,16<br />
+<br />
+Print "Press a key to read color values"<br />
+WaitKey()<br />
+<br />
+; Load and draw an image on to the screen - can be anything<br />
+pic=LoadImage("media/blitz_pic.bmp")<br />
+DrawImage pic,0,0 <br />
+<br />
+; Initialise an array big enough to fit all the color information of the screen<br />
+Dim pix(GraphicsWidth(),GraphicsHeight())<br />
+<br />
+; Lock buffer before using ReadPixelFast<br />
+LockBuffer<br />
+<br />
+; Use ReadPixel to get all the color information of the screen<br />
+For y=0 To GraphicsHeight()<br />
+For x=0 To GraphicsWidth()<br />
+pix(x,y)=ReadPixelFast(x,y)<br />
+Next<br />
+Next<br />
+<br />
+; Lock buffer after using ReadPixelFast<br />
+UnlockBuffer<br />
+<br />
+Cls<br />
+Locate 0,0<br />
+Print "Press a key to write pixels"<br />
+Print "Once this has finished, you can then press a key to end the program"<br />
+<br />
+WaitKey()<br />
+<br />
+; Lock buffer before using WritePixelFast<br />
+LockBuffer<br />
+<br />
+; Use WritePixel to redraw the screen using the color information we got earlier<br />
+For y=0 To GraphicsHeight()<br />
+For x=0 To GraphicsWidth()<br />
+WritePixelFast x,y,pix(x,GraphicsHeight()-y) ; get y array value in backwards  order, to flip screen<br />
+Next<br />
+Next<br />
+<br />
+; Unlock buffer after using WritePixelFast<br />
+UnlockBuffer<br />
+<br />
+WaitKey()<br />
+
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=ReadPixelFast&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

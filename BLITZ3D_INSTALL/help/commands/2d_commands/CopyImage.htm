@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>CopyImage (handle)</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+handle=the variable you gave the handle to when you loaded the image
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+Instead of loading a graphic twice in two different handles, you can load  the image ONCE then use the CopyImage command to make as many copies in memory  as you want.<br />
+<br />
+Why would you want to do this? So you still have a copy of the original image  in case you want to alter a copy later for another purpose.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/CopyImage.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; CopyImage Example<br />
+<br />
+; Load an image and give its handle to gfxOld variable<br />
+gfxOld=LoadImage("mypicture.bmp")<br />
+<br />
+; Duplicate the gfxOld image to a new handle variable<br />
+gfxNew=CopyImage(gfxOld)<br />
+
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=CopyImage&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

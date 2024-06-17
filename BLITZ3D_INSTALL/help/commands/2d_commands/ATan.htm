@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>ATan# ( t# )</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+t = any number.<br />
+<br />
+It is considered to be the tangent of an angle.
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+ATan( t ) is an angle which has tangent = t.<br />
+It is in the range -90 to +90 degrees.<br />
+<br />
+See also ATan2 for an extended version with 360 degree range.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/ATan.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; ATan example<br />
+<br />
+Const width = 640, height = 480<br />
+<br />
+Graphics width, height<br />
+<br />
+<br />
+Local T#, AT#   ; Tan and ATan<br />
+<br />
+zero# = 0<br />
+<br />
+Print "       T      ATan( T )"<br />
+Print "======================="<br />
+<br />
+; First, an extreme case...<br />
+<br />
+T# = 1 / zero    ; +Infinity<br />
+AT = ATan( T ) <br />
+Print RSet(T, 10) + RSet( AT, 11)<br />
+<br />
+; Now, back to normal usage...<br />
+<br />
+For n = -10 To 10<br />
+<br />
+T = Sgn( n ) * n * n<br />
+AT = ATan( T ) <br />
+Print RSet(T, 10) + RSet( AT, 11)<br />
+<br />
+Next<br />
+<br />
+; Finally, another extreme case.<br />
+<br />
+T# = -1 / zero    ; -Infinity<br />
+AT = ATan( T ) <br />
+Print RSet(T, 10) + RSet( AT, 11)<br />
+<br />
+WaitKey()  :  End
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=ATan&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

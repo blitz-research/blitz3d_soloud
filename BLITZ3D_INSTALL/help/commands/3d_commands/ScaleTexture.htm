@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>ScaleTexture texture,u_scale#,v_scale#</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+texture - name of texture<br />
+u_scale# - u scale<br />
+v_scale# - v scale
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+Scales a texture by an absolute amount.<br />
+<br />
+This will have an immediate  effect on all instances of the texture being used.
+</td>
+</tr>
+</table>
+<h1><a href=../3d_examples/ScaleTexture.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; ScaleTexture Example<br />
+; --------------------<br />
+<br />
+Graphics3D 640,480<br />
+SetBuffer BackBuffer()<br />
+<br />
+camera=CreateCamera()<br />
+<br />
+light=CreateLight()<br />
+RotateEntity light,90,0,0<br />
+<br />
+cube=CreateCube()<br />
+PositionEntity cube,0,0,5<br />
+<br />
+; Load texture<br />
+tex=LoadTexture( "media/b3dlogo.jpg" )<br />
+<br />
+; Texture cube<br />
+EntityTexture cube,tex<br />
+<br />
+; Set initial uv scale values<br />
+u_scale#=1<br />
+v_scale#=1<br />
+<br />
+While Not KeyDown( 1 )<br />
+<br />
+; Change uv scale values depending on key pressed<br />
+If KeyDown( 208 )=True Then u_scale#=u_scale#-0.01 <br />
+If KeyDown( 200 )=True Then u_scale#=u_scale#+0.01 <br />
+If KeyDown( 203 )=True Then v_scale#=v_scale#-0.01 <br />
+If KeyDown( 205 )=True Then v_scale#=v_scale#+0.01 <br />
+<br />
+; Scale texture<br />
+ScaleTexture tex,u_scale#,v_scale# <br />
+<br />
+TurnEntity cube,0.1,0.1,0.1<br />
+<br />
+RenderWorld<br />
+<br />
+Text 0,0,"Use cursor keys to change uv scale values"<br />
+Text 0,20,"u_scale#="+u_scale#<br />
+Text 0,40,"v_scale#="+v_scale#<br />
+<br />
+Flip<br />
+<br />
+Wend<br />
+<br />
+End
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=ScaleTexture&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>WritePixel x,y,argb,[buffer]</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+x - y-coordinate of pixel<br />
+y - y-coordinate of pixel<br />
+argb - argb colour value of pixel (alpha, red, green, blue)<br />
+buffer (optional) - name of buffer to write colour value to, e.g. BackBuffer()
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+Writes a color value to either the current buffer or the specified buffer.<br />
+<br />
+You can use this command on a locked buffer for a slight speed-up.
+<br>
+<br>
+See also: <a class=small href=Plot.htm>Plot</a>, <a class=small href=WritePixelFast.htm>WritePixelFast</a>, <a class=small href=LockBuffer.htm>LockBuffer</a>.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/WritePixel.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; ReadPixel/WritePixel Example<br />
+; ----------------------------<br />
+<br />
+Graphics 640,480,16<br />
+<br />
+Print "Press a key to read color values (this may take a few seconds)"<br />
+WaitKey()<br />
+<br />
+; Load and draw an image on to the screen - can be anything<br />
+pic=LoadImage("media/blitz_pic.bmp")<br />
+DrawImage pic,0,0 <br />
+<br />
+; Initialise an array big enough to fit all the color information of the screen<br />
+Dim pix(GraphicsWidth(),GraphicsHeight())<br />
+<br />
+; Use ReadPixel to get all the color information of the screen<br />
+For y=0 To GraphicsHeight()<br />
+For x=0 To GraphicsWidth()<br />
+pix(x,y)=ReadPixel(x,y)<br />
+Next<br />
+Next<br />
+<br />
+Cls<br />
+Locate 0,0<br />
+Print "Press a key to write pixels (this may takes a few seconds)"<br />
+Print "Once this has finished, you can then press a key to end the program"<br />
+<br />
+WaitKey()<br />
+<br />
+; Use WritePixel to redraw the screen using the color information we got earlier<br />
+For y=0 To GraphicsHeight()<br />
+For x=0 To GraphicsWidth()<br />
+WritePixel x,y,pix(x,GraphicsHeight()-y) ; get y array value in backwards order,  to flip screen<br />
+Next<br />
+Next<br />
+<br />
+WaitKey()
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=WritePixel&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

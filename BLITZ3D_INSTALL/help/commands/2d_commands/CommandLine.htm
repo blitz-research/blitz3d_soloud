@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>CommandLine$()</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+None.
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+If you are writing an application or game that allows starting with special  parameters on the command line, you can use this command to retrieve the parameters.<br />
+<br />
+For example, you might want to start the program with a debug variable set so  you can track stuff during execution. So, you could offer the ability to run  the executatble with a /debug parameter. If they execute the program with the  parameter, then you can set a flag inside your game.<br />
+<br />
+To simulate the command line passing in the editor, select PROGRAM->PROGRAM  COMMAND LINE from the pulldowns and enter a value to be passed at runtime. <br />
+<br />
+See the example.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/CommandLine.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; CommandLine$() Example<br />
+; Be sure to use PROGRAM->PROGRAM COMMAND LINE from the<br />
+; pull down and put /debug in there to test with.<br />
+<br />
+a$=CommandLine$()<br />
+<br />
+If a$="/debug" Then <br />
+Print "Debug mode is on!"<br />
+debug=1<br />
+Else<br />
+Print "No debugging activated."<br />
+debug=0<br />
+End If
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=CommandLine&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

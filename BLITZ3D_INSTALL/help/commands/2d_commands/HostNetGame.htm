@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>HostNetGame (gamename$)</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+gamename$ = string value designating the game's name
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+This allows you to bypass the 'standard' networked game dialog box (normally  using StartNetGame) and start a hosted game directly.  A value of 2 is returned if the hosted game has started successfully. 
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/HostNetGame.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; HostNetGame example<br />
+<br />
+joinResults=HostNetGame("ShaneGame")<br />
+<br />
+Select joinResults<br />
+Case 2<br />
+Print "Successfully started host game!"<br />
+Default<br />
+Print "Game was unable to start!"<br />
+End Select <br />
+waitkey()<br />
+
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=HostNetGame&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

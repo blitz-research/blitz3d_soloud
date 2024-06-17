@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>GFXModeHeight (mode)</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+None.
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+Once you determine the video modes available by the video card using CountGFXModes(), you can iterate through them  and determine the width, height, and color depth capabilities of each mode.  Use this command to get the height of the mode. Use the GFXModeWidth and GFXModeDepth  to get the remaining parameters.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/GFXModeHeight.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; CountGFXModes()/GfxModeWidth/GfxModeHeight/GfxModeDepth example<br />
+<br />
+intModes=CountGfxModes()<br />
+<br />
+Print "There are " + intModes + "graphic modes available:"<br />
+<br />
+; Display all modes including width, height, and color depth<br />
+For t = 1 To intModes<br />
+Print "Mode " + t + ":<br />
+Print "Width=" + GfxModeWidth(t)<br />
+Print "Height=" + GfxModeHeight(t)<br />
+Print "Height=" + GfxModeDepth(t)<br />
+Next<br />
+
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=GFXModeHeight&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

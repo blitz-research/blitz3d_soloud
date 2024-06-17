@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>Default</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+None.
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+In a SELECT structure, you may wish to execute  code if none of the cases you specify are met. All code after DEFAULT to END SELECT will be executed if no case is met.  See SELECT, CASE, and the example  for more.
+<br>
+<br>
+See also: <a class=small href=Select.htm>Select</a>, <a class=small href=Case.htm>Case</a>, <a class=small href=End Select.htm>End Select</a>.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/Default.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; SELECT/CASE/DEFAULT/END SELECT Example<br />
+; Assign a random number 1-10<br />
+mission=Rnd(1,10)<br />
+<br />
+; Start the selection process based on the value of 'mission' variable<br />
+Select mission<br />
+<br />
+; Is mission = 1?<br />
+Case 1<br />
+Print "Your mission is to get the plutonium and get out alive!"<br />
+<br />
+; Is mission = 2?<br />
+Case 2<br />
+Print "Your mission is to destroy all enemies!"<br />
+<br />
+; Is mission = 3?<br />
+Case 3 <br />
+Print "Your mission is to steal the enemy building plans!"<br />
+<br />
+; What do do if none of the cases match the value of mission<br />
+Default <br />
+Print "Missions 4-10 are not available yet!"<br />
+<br />
+; End the selection process<br />
+End Select
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=Default&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

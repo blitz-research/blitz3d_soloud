@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>LoadSound (filename$)</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+filename$ - name of sound file. Formats supported: raw/wav/mp3/ogg
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+This command loads a sound file into memory. It returns a number if successful,  or 0 if there was a problem loading the sound. You must assign the value this  returns to a variable (preferably a Global variable)  for subsequent playback using (PlaySound). Look at the example. 
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/LoadSound.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; Assign a global variable for the sound<br />
+Global sndPlayerDie<br />
+<br />
+; Load the sound file into memory<br />
+<br />
+sndPlayerDie=LoadSound("sounds/die.wav")<br />
+<br />
+; Play the sound<br />
+<br />
+PlaySound sndPlayerDie<br />
+
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=LoadSound&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

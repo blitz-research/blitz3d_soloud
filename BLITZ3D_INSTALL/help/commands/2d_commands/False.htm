@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>False</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+None.
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+FALSE is a keyword to denote a negative result in a conditional statement.  Often times, FALSE is implied and doesn't need to be directly referenced - or  a NOT command is used in the comparison. FALSE can also  be used as a RETURN value from aFUNCTION. Also see the TRUE  command. See the example.
+<br>
+<br>
+See also: <a class=small href=True.htm>True</a>, <a class=small href=If.htm>If</a>, <a class=small href=Select.htm>Select</a>, <a class=small href=While.htm>While</a>, <a class=small href=Repeat.htm>Repeat</a>.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/False.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; FALSE example<br />
+<br />
+; Assign test a random number of 0 or 1<br />
+test= Rnd(0,1)<br />
+<br />
+; FALSE is implied because of the NOT<br />
+If not test=1 Then<br />
+Print "Test was valued at 0"<br />
+End If<br />
+<br />
+; Let's set test to be false<br />
+test=False<br />
+<br />
+; Pointlessly test it<br />
+If test=False Then<br />
+Print "Test is false"<br />
+else<br />
+print "Test is true"<br />
+End If
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=False&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

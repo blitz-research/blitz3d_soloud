@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>DrawBlock image, x,y [,frame]</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+image = variable of the image pointer<br />
+x = x location to draw the image<br />
+y = y location to draw the image<br />
+frame = image's frame to draw (optional - default is 0)
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+This is similar to the DrawImage command except  that any transparency or MaskImage is ignored and  the entire image (including masked colors) is drawn. The frame is optional.<br />
+<br />
+See also: DrawImage
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/DrawBlock.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; DrawBlock Example<br />
+<br />
+; Turn on graphics mode<br />
+Graphics 640,480,16<br />
+<br />
+; Create new empty graphic to store our circle in<br />
+gfxCircle=CreateImage(50,50)<br />
+<br />
+; Draw the circle image<br />
+; Set drawing operations to point to our new empty graphic<br />
+SetBuffer ImageBuffer(gfxCircle)<br />
+Color 255,0,0<br />
+; Note the extra space between the circle and the edge of the graphic<br />
+Oval 10,10,30,30,1<br />
+<br />
+; Let's not forget to put the drawing buffer back!<br />
+SetBuffer BackBuffer()<br />
+; Set the CLS color to white<br />
+ClsColor 255,255,255<br />
+<br />
+; Let the user move the circle graphic around a white screen<br />
+; putting the graphic at the MouseX,Y coordinates<br />
+While Not KeyHit(1)<br />
+Cls<br />
+DrawBlock gfxCircle,MouseX(),MouseY()<br />
+Flip<br />
+Wend
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=DrawBlock&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>Ceil# ( y# )</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+y = any number
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+As with Floor there is often some confusion with negative numbers:<br />
+<br />
+Ceil(  1.75 ) ...... 2.0<br />
+Ceil( -1.75 ) ... -1.0<br />
+<br />
+See also Floor and Int for other types of rounding.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/Ceil.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; Ceil / Floor / Int example, three kinds of rounding.<br />
+<br />
+; Move mouse. Escape quits.<br />
+<br />
+Graphics 640, 480<br />
+<br />
+Const KEY_ESC = 1<br />
+<br />
+SetBuffer BackBuffer()<br />
+Origin 320, 240<br />
+<br />
+MoveMouse 320, 240  :  HidePointer<br />
+<br />
+While Not KeyDown( KEY_ESC )<br />
+<br />
+Cls<br />
+<br />
+my = MouseY() - 240<br />
+Color 100, 100, 0<br />
+Line -320, my, 319, my<br />
+<br />
+DrawNumberLine<br />
+<br />
+y# = Float( -my ) / 32<br />
+<br />
+Text 100, 50, "          y = "  + y<br />
+Text 100, 70, "  Ceil( y ) = "  + Ceil( y )<br />
+Text 100, 90, " Floor( y ) = "  + Floor( y )<br />
+Text 100, 110, "   Int( y ) = " + Int( y )<br />
+<br />
+Flip<br />
+<br />
+Wend<br />
+End<br />
+<br />
+Function DrawNumberLine( )  ; vertical line with numeric labels<br />
+<br />
+Color 255, 255, 255<br />
+Line 0, -240, 0, 239<br />
+<br />
+For n = -7 To 7<br />
+yn = -32 * n<br />
+Line -2, yn, 2, yn<br />
+Text -30, yn - 6, RSet( n, 2 )<br />
+Next<br />
+<br />
+End Function
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=Ceil&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

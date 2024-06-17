@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>MouseY()</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+None
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+This command returns the Y location of the mouse on the screen. This position is always from the range 0 to GraphicsHeight( ) - 1. You can use this command in combination with DrawImage to make a custom mouse pointer, or to control something on the screen directly with the mouse.
+<br>
+<br>
+See also: <a class=small href=MouseX.htm>MouseX</a>, <a class=small href=MouseZ.htm>MouseZ</a>.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/MouseY.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+Graphics 640,480<br />
+<br />
+SetBuffer BackBuffer()<br />
+<br />
+Repeat<br />
+Cls<br />
+<br />
+Text 320,0,"Click to reset mouse",True<br />
+<br />
+Text 0,0,"Mouse X:"+MouseX()<br />
+Text 0,10,"Mouse Y:"+MouseY()<br />
+<br />
+If MouseDown(1) Or MouseDown(2) Then MoveMouse 320,240<br />
+<br />
+Text MouseX(),MouseY(),"X",True,True<br />
+<br />
+Flip<br />
+<br />
+Until KeyHit(1)<br />
+<br />
+End
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=MouseY&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

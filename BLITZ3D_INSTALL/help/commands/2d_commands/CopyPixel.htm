@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>CopyPixel src_x,src_y,src_buffer,dest_x,dest_y,[dest_buffer]</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+src_x - x-coordinate of source pixel to copy from<br />
+src_y - y-coordinate of source pixel to copy from<br />
+src_buffer - name of buffer to copy from, e.g. ImageBuffer()<br />
+dest_x - x-coordinate of destination pixel to copy to<br />
+dest_y - y-coordinate of destination pixel to copy to<br />
+dest_buffer (optional) - name of buffer to copy to, e.g. BackBuffer()
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+You can use this command  on a locked buffer for a slight speed-up. See LockBuffer. <br />
+<br />
+See also: CopyPixelFast.
+</td>
+</tr>
+</table>
+<h1><a href=../2d_examples/CopyPixel.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+; CopyPixel/CopyPixelFast Example<br />
+; -------------------------------<br />
+<br />
+Graphics 640,480,16<br />
+<br />
+Print "Press a key to use CopyPixel to copy the top half of an image to the  frontbuffer"<br />
+WaitKey()<br />
+<br />
+; Load an image - can be anything<br />
+pic=LoadImage("media/blitz_pic.bmp")<br />
+<br />
+; Use CopyPixel to copy the top half of the image to the frontbuffer<br />
+For y=0 To ImageHeight(pic)/2<br />
+For x=0 To ImageWidth(pic)<br />
+CopyPixel x,y,ImageBuffer(pic),x,y<br />
+Next<br />
+Next<br />
+<br />
+Locate 0,GraphicsHeight()/2<br />
+Print "Press a key to use CopyPixelFast to copy the bottom half of the image"<br />
+Print "Once this has finished, you can then press a key to end the program"<br />
+<br />
+WaitKey()<br />
+<br />
+; Lock buffer before using CopyPixelFast<br />
+LockBuffer<br />
+<br />
+; Use CopyPixelFast to copy the bottom half of the image to the frontbuffer<br />
+For y=0 To (ImageHeight(pic)/2)+ImageHeight(pic)<br />
+For x=0 To ImageWidth(pic)<br />
+CopyPixelFast x,y,ImageBuffer(pic),x,y<br />
+Next<br />
+Next<br />
+<br />
+; Unlock buffer after using CopyPixelFast<br />
+UnlockBuffer<br />
+<br />
+WaitKey()
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=CopyPixel&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

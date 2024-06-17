@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>Blitz3D Docs</title>
+<link rel=stylesheet href=../css/commands.css type=text/css>
+</head>
+<body>
+<h1>GfxDriver3D(driver)</h1>
+<h1>Parameters</h1>
+<table>
+<tr>
+<td>
+driver - display driver number to check, from 1 to CountGfxDrivers ()
+</td>
+</tr>
+</table>
+<h1>Description</h1>
+<table>
+<tr>
+<td>
+GfxDriver3D returns True if the specified graphics driver is 3D-capable.<br />
+<br />
+GfxDriver3D is generally used after obtaining a list of available graphics drivers from a user's system via CountGfxDrivers(). You apply this to each driver in turn (or a selected driver) to see if it is 3D-capable. If this returns False, the driver can not perform 3D operations.<br />
+<br />
+On systems with more than one display driver, you can use this to check each for 3D capability before choosing one via the SetGfxDriver command.
+</td>
+</tr>
+</table>
+<h1><a href=../3d_examples/GfxDriver3D.bb>Example</a></h1>
+<table>
+<tr>
+<td>
+For a = 1 To CountGfxDrivers ()<br />
+If GfxDriver3D (a)<br />
+Print GfxDriverName (a) + " is 3D-capable"<br />
+Else<br />
+Print GfxDriverName (a) + " is NOT 3D-capable"<br />
+EndIf<br />
+Delay 100<br />
+Next
+</td>
+</tr>
+</table>
+<br>
+<a target=_top href=../index.htm>Index</a><br>
+<br>
+Click <a href=http://www.blitzbasic.co.nz/b3ddocs/command.php?name=GfxDriver3D&ref=comments target=_blank>here</a> to view the latest version of this page online</body>
+</html>

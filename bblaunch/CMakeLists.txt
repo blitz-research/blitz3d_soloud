@@ -6,10 +6,6 @@ add_executable(bblaunch WIN32
         bblaunch.cpp
         bblaunch.ico
         bblaunch.rc
-#        checkdx.cpp
-#        checkdx.h
-        checkie.cpp
-        checkie.h
         )
 
 target_compile_options(bblaunch PRIVATE /Gz)

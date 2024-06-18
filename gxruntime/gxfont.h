@@ -2,6 +2,8 @@
 #ifndef GXFONT_H
 #define GXFONT_H
 
+#include <ddraw.h>
+
 class gxCanvas;
 class gxGraphics;
 

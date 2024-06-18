@@ -6,6 +6,10 @@
 
 #include "gxsound.h"
 
+#if BB_FMOD_ENABLED
+#include <fmod375/include/fmod.h>
+#endif
+
 class gxRuntime;
 struct FSOUND_SAMPLE;
 

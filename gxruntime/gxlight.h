@@ -2,6 +2,8 @@
 #ifndef GXLIGHT_H
 #define GXLIGHT_H
 
+#include <d3d.h>
+
 class gxScene;
 
 class gxLight{

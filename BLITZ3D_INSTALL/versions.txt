@@ -1,9 +1,9 @@
 
 ***** V1.114 *****
 
-SoLoud audio module added.
-
 FMOD files removed from repository.
+
+SoLoud audio module added.
 
 General tidy up.
  

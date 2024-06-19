@@ -2,3 +2,4 @@
 *.dll
 .idea
 cmake-build-*
+Blitz3D-V*

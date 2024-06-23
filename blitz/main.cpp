@@ -29,7 +29,7 @@ using namespace std;
 #undef environ
 
 static void showInfo(){
-	const int major=(VERSION&0xffff)/100,minor=(VERSION&0xffff)%100;
+	const int major=(VERSION&0xffff)/1000,minor=(VERSION&0xffff)%1000;
 	cout<<"BlitzCC V"<<major<<"."<<minor<<endl;
 	cout<<"(C)opyright 2000-2003 Blitz Research Ltd"<<endl;
 }
@@ -49,7 +49,6 @@ static void showHelp(){
 	cout<<"+k         : dump keywords and syntax"<<endl;
 	cout<<"-v		  : version info"<<endl;
 	cout<<"-o exefile : generate executable"<<endl;
-
 }
 
 static void err( const string &t ){

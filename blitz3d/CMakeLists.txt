@@ -83,7 +83,7 @@ add_library(blitz3d
 
 target_compile_options(blitz3d PRIVATE /Gz)
 
-set(LIBS gxruntime ${CMAKE_CURRENT_SOURCE_DIR}/minidx9/lib/d3dxof.lib)
+set(LIBS gxruntime ${CMAKE_CURRENT_SOURCE_DIR}/minidx9/lib/d3dxof.lib freetype)
 if(NOT BB_FMOD_ENABLED)
 set(LIBS ${LIBS} soloud)
 endif()

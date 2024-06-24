@@ -13,7 +13,7 @@ target_compile_options(bbruntime_dll PRIVATE /Gz)
 
 target_link_options(bbruntime_dll PRIVATE /SUBSYSTEM:WINDOWS)
 
-target_link_libraries(bbruntime_dll bbruntime)
+target_link_libraries(bbruntime_dll bbruntime freetype)
 
 copy_dll_to_install(bbruntime_dll bin/runtime)
 

@@ -26,7 +26,7 @@ set(SRCS
 	userlibs.cpp
 	userlibs.h
 )
-set(LIBS gxruntime)
+set(LIBS gxruntime freetype)
 
 if (BB_BLITZ3D_ENABLED)
 

@@ -21,6 +21,14 @@ underlined - True to load underlined version of font, False not to (default is F
 <table>
 <tr>
 <td>
+If you want to use the <a href=Text.htm>Text</a> function to render text, you must call this function as well as the <a href=SetFont.htm>SetFont</a> function.
+<br />
+
+<br />
+When loading fonts, the path to the font must be loaded, and the font name cannot be directly entered, for example: "C:\Windows\Fonts\Arial.ttf".
+<br />
+
+<br />
 Loads a font and returns a font handle.<br />
 <br />
 You can then use the font handle  with commands such as SetFont and FreeFont. <br />
@@ -43,10 +51,10 @@ Graphics 800,600<br />
 Global fntArial,fntArialB,fntArialI,fntArialU<br />
 <br />
 ; Load fonts to a file handle variables<br />
-fntArial=LoadFont("Arial",24)<br />
-fntArialB=LoadFont("Arial",18,True)<br />
-fntArialI=LoadFont("Arial",32,False,True)<br />
-fntArialU=LoadFont("Arial",14,False,False,True)<br />
+fntArial=LoadFont("C:\Windows\Fonts\Arial.ttf",24)<br />
+fntArialB=LoadFont("C:\Windows\Fonts\Arial.ttf",18,True)<br />
+fntArialI=LoadFont("C:\Windows\Fonts\Arial.ttf",32,False,True)<br />
+fntArialU=LoadFont("C:\Windows\Fonts\Arial.ttf",14,False,False,True)<br />
 <br />
 ; Set the font and print text<br />
 SetFont fntArial<br />

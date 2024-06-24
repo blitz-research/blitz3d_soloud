@@ -12,6 +12,8 @@ set(SRCS
 	gxfilesystem.h
 	gxtimer.cpp
 	gxtimer.h
+                gxutf8.cpp
+                gxutf8.h
 	std.cpp
 	std.h
 )
@@ -65,7 +67,7 @@ target_compile_options(gxruntime PRIVATE /Gz)
 set(LIBS stdutil winmm Ws2_32.lib)
 
 if (BB_BLITZ3D_ENABLED)
-	set(LIBS ${LIBS} freeimage amstrmid dinput8 dxguid ddraw)
+	set(LIBS ${LIBS} freeimage amstrmid freetype dinput8 dxguid ddraw)
 endif ()
 
 target_link_libraries(gxruntime ${LIBS})

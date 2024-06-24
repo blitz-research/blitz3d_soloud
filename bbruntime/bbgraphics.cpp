@@ -614,8 +614,8 @@ gxFont *bbLoadFont( BBStr *name,int height,int bold,int italic,int underline ){
 
 void bbFreeFont( gxFont *f ){
 	debugFont( f );
-	if( f==curr_font ) bbSetFont( gx_graphics->getDefaultFont() );
-	gx_graphics->freeFont( f );
+	//if( f==curr_font ) bbSetFont( gx_graphics->getDefaultFont() );
+	//gx_graphics->freeFont( f );
 }
 
 int bbFontWidth(){

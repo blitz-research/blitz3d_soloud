@@ -21,6 +21,10 @@ center y = optional; true = center vertically
 <table>
 <tr>
 <td>
+<a href=LoadFont.htm>LoadFont</a> and <a href=SetFont.htm>SetFont</a> must be used to load fonts when rendering text
+<br />
+
+<br />
 Prints a string at the designated screen coordinates. You can center the  text on the coordiates by setting center x/center y to TRUE. This draws the  text in the current drawing color.<br />
 <br />
 Note: Printing a space with text will NOT render a block - a space is an empty  value. So printing " " will not make a box appear.
@@ -39,6 +43,10 @@ Graphics 800,600,16<br />
 ; wait for ESC key before ending<br />
 While Not KeyHit(1)<br />
 ;print the text, centered horizontally at x=400, y=0<br />
+Font = LoadFont("C:\Windows\Fonts\Arial.ttf",16)
+<br />
+SetFont(Font)
+<br />
 Text 400,0,"Hello There!",True,False<br />
 Wend<br />
 

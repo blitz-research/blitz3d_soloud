@@ -21,6 +21,10 @@ underlined set to TRUE to load font as UNDERLINED
 <table>
 <tr>
 <td>
+If you want to use the <a href=Text.htm>Text</a> function to render text, you must call this function as well as the <a href=LoadFont.htm>LoadFont</a> function.
+<br />
+
+<br />
 This activates a TrueType font previously loaded into memory (though the LoadFont command) for future use with printing commands  such as Text.<br />
 <br />
 Note: Blitz doesn't work with SYMBOL fonts, like Webdings and WingDings.<br />
@@ -42,10 +46,10 @@ Graphics 800,600,16<br />
 Global fntArial,fntArialB,fntArialI,fntArialU<br />
 <br />
 ;Load fonts to a file handle variables<br />
-fntArial=LoadFont("Arial",24,False,False,False)<br />
-fntArialB=LoadFont("Arial",18,True,False,False)<br />
-fntArialI=LoadFont("Arial",32,False,True,False)<br />
-fntArialU=LoadFont("Arial",14,False,False,True)<br />
+fntArial=LoadFont("C:\Windows\Fonts\Arial.ttf",24,False,False,False)<br />
+fntArialB=LoadFont("C:\Windows\Fonts\Arial.ttf",18,True,False,False)<br />
+fntArialI=LoadFont("C:\Windows\Fonts\Arial.ttf",32,False,True,False)<br />
+fntArialU=LoadFont("C:\Windows\Fonts\Arial.ttf",14,False,False,True)<br />
 <br />
 ; set the font and print text<br />
 SetFont fntArial<br />

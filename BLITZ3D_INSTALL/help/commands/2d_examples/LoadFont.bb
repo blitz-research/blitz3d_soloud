@@ -8,10 +8,10 @@ Graphics 800,600
 Global fntArial,fntArialB,fntArialI,fntArialU
 
 ; Load fonts to a file handle variables
-fntArial=LoadFont("Arial",24)
-fntArialB=LoadFont("Arial",18,True)
-fntArialI=LoadFont("Arial",32,False,True)
-fntArialU=LoadFont("Arial",14,False,False,True)
+fntArial=LoadFont("C:\Windows\Fonts\Arial.ttf",24)
+fntArialB=LoadFont("C:\Windows\Fonts\Arial.ttf",18,True)
+fntArialI=LoadFont("C:\Windows\Fonts\Arial.ttf",32,False,True)
+fntArialU=LoadFont("C:\Windows\Fonts\Arial.ttf",14,False,False,True)
 
 ; Set the font and print text
 SetFont fntArial

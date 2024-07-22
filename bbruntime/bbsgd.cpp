@@ -7,153 +7,157 @@
 
 namespace {
 
-void SGD_DECL errorHandler(SGD_String error, void *context) {
-	RTEX(error);
+	void SGD_DECL errorHandler(SGD_String error, void *context) {
+		RTEX(error);
+	}
+
+	void alert(BBStr *message) {
+		sgd_Alert(message->c_str());
+		delete message;
+	}
+
+	void createWindow(int width, int height, BBStr *title, int flags) {
+		sgd_CreateWindow(width, height, title->c_str(), flags);
+		delete title;
+	}
+
+	void setConfigVar(BBStr *name, BBStr *value) {
+		sgd_SetConfigVar(name->c_str(), value->c_str());
+		delete name;
+		delete value;
+	}
+
+	SGD_Texture loadTexture(BBStr *path, int format, int flags) {
+		auto texture = sgd_LoadTexture(path->c_str(), format, flags);
+		delete path;
+
+		return texture;
+	}
+
+	SGD_Material loadPBRMaterial(BBStr *path) {
+		auto material = sgd_LoadPBRMaterial(path->c_str());
+		delete path;
+
+		return material;
+	}
+
+	SGD_Material loadPrelitMaterial(BBStr *path) {
+		auto material = sgd_LoadPrelitMaterial(path->c_str());
+		delete path;
+
+		return material;
+	}
+
+	SGD_Mesh loadMesh(BBStr *path) {
+		auto mesh = sgd_LoadMesh(path->c_str());
+		delete path;
+
+		return mesh;
+	}
+
+	SGD_Skybox loadSkybox(BBStr *path, float roughness) {
+		auto skybox = sgd_LoadSkybox(path->c_str(), roughness);
+		delete path;
+
+		return skybox;
+	}
+
+	SGD_Model loadModel(BBStr *path) {
+		auto model = sgd_LoadModel(path->c_str());
+		delete path;
+
+		return model;
+	}
+
+	SGD_Model loadBonedModel(BBStr *path, int skinned) {
+		auto model = sgd_LoadBonedModel(path->c_str(), skinned);
+		delete path;
+
+		return model;
+	}
+
+	void setMaterialTexture(SGD_Material material, BBStr *name, SGD_Texture texture) {
+		sgd_SetMaterialTexture(material, name->c_str(), texture);
+		delete name;
+	}
+
+	void setMaterialVector4f(SGD_Material material, BBStr *name, float x, float y, float z, float w) {
+		sgd_SetMaterialVector4f(material, name->c_str(), x, y, z, w);
+		delete name;
+	}
+
+	void setMaterialVector3f(SGD_Material material, BBStr *name, float x, float y, float z) {
+		sgd_SetMaterialVector3f(material, name->c_str(), x, y, z);
+		delete name;
+	}
+
+	void setMaterialVector2f(SGD_Material material, BBStr *name, float x, float y) {
+		sgd_SetMaterialVector2f(material, name->c_str(), x, y);
+		delete name;
+	}
+
+	void setMaterialFloat(SGD_Material material, BBStr *name, float n) {
+		sgd_SetMaterialFloat(material, name->c_str(), n);
+		delete name;
+	}
+
+	SGD_Font loadFont(BBStr *path, float height) {
+		auto font = sgd_LoadFont(path->c_str(), height);
+		delete path;
+
+		return font;
+	}
+
+	float getTextWidth(SGD_Font font, BBStr *text) {
+		auto r = sgd_GetTextWidth(font, text->c_str());
+		delete text;
+		return r;
+	}
+
+	float get2DTextWidth(BBStr *text) {
+		auto r = sgd_Get2DTextWidth(text->c_str());
+		delete text;
+		return r;
+	}
+
+	SGD_Image loadImage(BBStr *path, int depth) {
+		auto r = sgd_LoadImage(path->c_str(), depth);
+		delete path;
+		return r;
+	}
+
+	void draw2DText(BBStr *text, float x, float y) {
+		sgd_Draw2DText(text->c_str(), x, y);
+		delete text;
+	}
+
+	SGD_Sound loadSound(BBStr *path) {
+		auto sound = sgd_LoadSound(path->c_str());
+		delete path;
+
+		return sound;
+	}
 }
 
-void alert(BBStr* message) {
-	sgd_Alert(message->c_str());
-	delete message;
-}
+bool sgd_create() {
 
-void createWindow(int width, int height, BBStr *title, int flags) {
-	sgd_CreateWindow(width, height, title->c_str(), flags);
-	delete title;
-}
+	sgd_SetConfigVar("log.stdoutEnabled","0");
+	sgd_SetConfigVar("dawn.backendType","D3D12");
 
-void setWebGPUBackend(BBStr* backend) {
-	sgd_SetWebGPUBackend(backend->c_str());
-	delete backend;
-}
-
-SGD_Texture loadTexture(BBStr* path, int format, int flags) {
-	auto texture = sgd_LoadTexture(path->c_str(), format, flags);
-	delete path;
-
-	return texture;
-}
-
-SGD_Material loadPBRMaterial(BBStr* path) {
-	auto material = sgd_LoadPBRMaterial(path->c_str());
-	delete path;
-
-	return material;
-}
-
-SGD_Material loadPrelitMaterial(BBStr* path) {
-	auto material = sgd_LoadPrelitMaterial(path->c_str());
-	delete path;
-
-	return material;
-}
-
-SGD_Mesh loadMesh(BBStr* path) {
-	auto mesh = sgd_LoadMesh(path->c_str());
-	delete path;
-
-	return mesh;
-}
-
-SGD_Skybox loadSkybox(BBStr* path, float roughness) {
-	auto skybox = sgd_LoadSkybox(path->c_str(), roughness);
-	delete path;
-
-	return skybox;
-}
-
-SGD_Model loadModel(BBStr* path) {
-	auto model = sgd_LoadModel(path->c_str());
-	delete path;
-
-	return model;
-}
-
-SGD_Model loadBonedModel(BBStr* path,int skinned) {
-	auto model = sgd_LoadBonedModel(path->c_str(), skinned);
-	delete path;
-
-	return model;
-}
-
-void setMaterialTexture(SGD_Material material, BBStr* name, SGD_Texture texture) {
-	sgd_SetMaterialTexture(material, name->c_str(), texture);
-	delete name;
-}
-
-void setMaterialVector4f(SGD_Material material, BBStr* name, float x, float y, float z,float w) {
-	sgd_SetMaterialVector4f(material, name->c_str(), x, y, z, w);
-	delete name;
-}
-
-void setMaterialVector3f(SGD_Material material, BBStr* name, float x, float y, float z) {
-	sgd_SetMaterialVector3f(material, name->c_str(), x, y, z);
-	delete name;
-}
-
-void setMaterialVector2f(SGD_Material material, BBStr* name, float x, float y) {
-	sgd_SetMaterialVector2f(material, name->c_str(), x, y);
-	delete name;
-}
-
-void setMaterialFloat(SGD_Material material, BBStr* name, float n) {
-	sgd_SetMaterialFloat(material, name->c_str(), n);
-	delete name;
-}
-
-SGD_Font loadFont(BBStr* path, float height) {
-	auto font = sgd_LoadFont(path->c_str(), height);
-	delete path;
-
-	return font;
-}
-
-float getTextWidth(SGD_Font font, BBStr* text) {
-	auto r = sgd_GetTextWidth(font, text->c_str());
-	delete text;
-	return r;
-}
-
-float get2DTextWidth(BBStr* text) {
-	auto r = sgd_Get2DTextWidth(text->c_str());
-	delete text;
-	return r;
-}
-
-SGD_Image loadImage(BBStr* path, int frameCount) {
-	auto r = sgd_LoadImage(path->c_str(), frameCount);
-	delete path;
-	return r;
-}
-
-void draw2DText(BBStr* text, float x, float y) {
-	sgd_Draw2DText(text->c_str(), x, y);
-	delete text;
-}
-
-SGD_Sound loadSound(BBStr* path) {
-	auto sound = sgd_LoadSound(path->c_str());
-	delete path;
-
-	return sound;
-}
-
-}
-
-bool sgd_create(){
 	sgd_Init();
 	sgd_SetErrorHandler(errorHandler, nullptr);
 	return true;
 }
 
-bool sgd_destroy(){
+bool sgd_destroy() {
 	sgd_Terminate();
 	return true;
 }
 
-bool sgd_link( void (*rtSym)( const char *sym, void *pc ) ){
+bool sgd_link(void (*rtSym)(const char *sym, void *pc)) {
 
 	// System
-	rtSym("SetWebGPUBackend$backend", setWebGPUBackend);
+	rtSym("SetConfigVar$name$value", setConfigVar);
 	rtSym("Alert$message", alert);
 	rtSym("%GetDesktopWidth", sgd_GetDesktopWidth);
 	rtSym("%GetDesktopHeight", sgd_GetDesktopHeight);
@@ -225,11 +229,11 @@ bool sgd_link( void (*rtSym)( const char *sym, void *pc ) ){
 	rtSym("%AddMeshVertex%mesh#x#y#z#nx#ny#nz#s#t", sgd_AddMeshVertex);
 	rtSym("%GetMeshVertexCount%mesh", sgd_GetMeshVertexCount);
 	rtSym("SetMeshVertex%mesh%vertex#x#y#z#nx#ny#nz#s#t", sgd_SetMeshVertex);
-	rtSym("SetMeshVertexPosition%mesh%vertex#x#y#z",sgd_SetMeshVertexPosition);
-	rtSym("SetMeshVertexNormal%mesh%vertex#nx#ny#nz",sgd_SetMeshVertexNormal);
-	rtSym("SetMeshVertexTangent%mesh%vertex#tx#ty#tz#tw",sgd_SetMeshVertexTangent);
-	rtSym("SetMeshVertexTexCoords%mesh%vertex#s#t",sgd_SetMeshVertexTexCoords);
-	rtSym("SetMeshVertexColor%mesh%vertex#r#g#b#a",sgd_SetMeshVertexColor);
+	rtSym("SetMeshVertexPosition%mesh%vertex#x#y#z", sgd_SetMeshVertexPosition);
+	rtSym("SetMeshVertexNormal%mesh%vertex#nx#ny#nz", sgd_SetMeshVertexNormal);
+	rtSym("SetMeshVertexTangent%mesh%vertex#tx#ty#tz#tw", sgd_SetMeshVertexTangent);
+	rtSym("SetMeshVertexTexCoords%mesh%vertex#s#t", sgd_SetMeshVertexTexCoords);
+	rtSym("SetMeshVertexColor%mesh%vertex#r#g#b#a", sgd_SetMeshVertexColor);
 
 	// Surfaces
 	rtSym("%CreateSurface%mesh%triangleCount%material", sgd_CreateSurface);
@@ -244,14 +248,14 @@ bool sgd_link( void (*rtSym)( const char *sym, void *pc ) ){
 	rtSym("#GetFontHeight%font", sgd_GetFontHeight);
 
 	// Image
-	rtSym("%LoadImage$path%frameCount", loadImage);
+	rtSym("%LoadImage$path%depth", loadImage);
+	rtSym("SetImageViewMode%image%viewMode", sgd_SetImageViewMode);
+	rtSym("SetImageSpriteRect%image#minX#minY#maxX#maxY", sgd_SetImageRect);
 	rtSym("SetImageBlendMode%image%blendMode", sgd_SetImageBlendMode);
-	rtSym("SetImageSpriteRect%image#minX#minY#maxX#maxY", sgd_SetImageSpriteRect);
-	rtSym("SetImageSpriteViewMode%image%viewMode", sgd_SetImageSpriteViewMode);
-	rtSym("SetImageDraw2DHandle%image#x#y", sgd_SetImageDraw2DHandle);
+	rtSym("SetImage2DHandle%image#x#y", sgd_SetImage2DHandle);
 	rtSym("%GetImageWidth%image", sgd_GetImageWidth);
 	rtSym("%GetImageHeight%image", sgd_GetImageHeight);
-	rtSym("%GetImageFrameCount%image", sgd_GetImageFrameCount);
+	rtSym("%GetImageDepth%image", sgd_GetImageDepth);
 
 	// 2D Overlay state
 	rtSym("Set2DFillColor#red#green#blue#alpha", sgd_Set2DFillColor);
@@ -277,13 +281,13 @@ bool sgd_link( void (*rtSym)( const char *sym, void *pc ) ){
 	rtSym("Draw2DOval#minX#minY#maxX#maxY", sgd_Draw2DOval);
 	rtSym("Draw2DImage%image#x#y#frame", sgd_Draw2DImage);
 	rtSym("Draw2DText$text#x#y", draw2DText);
-	
+
 	// Audio
 	rtSym("%LoadSound$path", loadSound);
-	rtSym("PlaySound%sound", sgd_PlaySound);
-	rtSym("CueSound%sound", sgd_CueSound);
-	rtSym("SetAudioVolume%sound#volume", sgd_SetAudioVolume);
-	rtSym("SetAudioPan%sound#pan", sgd_SetAudioPan);
+	rtSym("%PlaySound%sound", sgd_PlaySound);
+	rtSym("%CueSound%sound", sgd_CueSound);
+	rtSym("SetAudioVolume%audio#volume", sgd_SetAudioVolume);
+	rtSym("SetAudioPan%audio#pan", sgd_SetAudioPan);
 	rtSym("SetAudioPitchScale%audio#scale", sgd_SetAudioPitchScale);
 	rtSym("SetAudioLooping%audio%looping", sgd_SetAudioLooping);
 	rtSym("SetAudioPaused%audio%paused", sgd_SetAudioPaused);
@@ -296,15 +300,21 @@ bool sgd_link( void (*rtSym)( const char *sym, void *pc ) ){
 	rtSym("SetClearColor#red#green#blue#alpha", sgd_SetClearColor);
 	rtSym("SetClearDepth#depth", sgd_SetClearDepth);
 	rtSym("SetEnvTexture%texture", sgd_SetEnvTexture);
+
 	rtSym("SetCSMTextureSize%textureSize", sgd_SetCSMTextureSize);
-	rtSym("SetCSMSplitDistances#split0#split1#split2#splt3", sgd_SetCSMSplitDistances);
 	rtSym("SetMaxCSMLights%maxLights", sgd_SetMaxCSMLights);
 	rtSym("SetPSMTextureSize%textureSize", sgd_SetPSMTextureSize);
 	rtSym("SetMaxPSMLights%maxLights", sgd_SetMaxPSMLights);
+	rtSym("SetCSMSplitDistances#split0#split1#split2#splt3", sgd_SetCSMSplitDistances);
+	rtSym("SetCSMClipRange#clipRange", sgd_SetCSMClipRange);
+	rtSym("SetCSMDepthBias#depthBias", sgd_SetCSMDepthBias);
+	rtSym("SetPSMClipNear#clipNear", sgd_SetPSMClipNear);
+	rtSym("SetPSMDepthBias#depthBias", sgd_SetPSMDepthBias);
+
 	rtSym("RenderScene", sgd_RenderScene);
 	rtSym("Present", sgd_Present);
-	rtSym("#GetFPS",sgd_GetFPS);
-	rtSym("#GetRPS",sgd_GetRPS);
+	rtSym("#GetFPS", sgd_GetFPS);
+	rtSym("#GetRPS", sgd_GetRPS);
 
 	// Entity
 	rtSym("SetEntityEnabled%entity%enabled", sgd_SetEntityEnabled);
@@ -313,6 +323,7 @@ bool sgd_link( void (*rtSym)( const char *sym, void *pc ) ){
 	rtSym("%GetEntityVisible%entity", sgd_IsEntityVisible);
 	rtSym("DestroyEntity%entity", sgd_DestroyEntity);
 	rtSym("%CopyEntity%entity", sgd_CopyEntity);
+	rtSym("ResetEntity%entity", sgd_ResetEntity);
 	rtSym("SetEntityParent%entity%parent", sgd_SetEntityParent);
 	rtSym("%GetEntityParent%entity", sgd_GetEntityParent);
 	rtSym("SetEntityPosition%entity#x#y#z", sgd_SetEntityPosition);
@@ -359,7 +370,10 @@ bool sgd_link( void (*rtSym)( const char *sym, void *pc ) ){
 	rtSym("%CameraProject%camera#x#y#z", sgd_CameraProject);
 	rtSym("#GetProjectedX", sgd_GetProjectedX);
 	rtSym("#GetProjectedY", sgd_GetProjectedY);
-
+	rtSym("%CameraUnproject%camera#windowX#windowY#depth", sgd_CameraUnproject);
+	rtSym("#GetUnprojectedX", sgd_GetUnprojectedX);
+	rtSym("#GetUnprojectedY", sgd_GetUnprojectedY);
+	rtSym("#GetUnprojectedZ", sgd_GetUnprojectedZ);
 
 	// Light
 	rtSym("%CreateDirectionalLight", sgd_CreateDirectionalLight);
@@ -412,7 +426,7 @@ bool sgd_link( void (*rtSym)( const char *sym, void *pc ) ){
 	rtSym("#GetCollisionNY%collider%index", sgd_GetCollisionNY);
 	rtSym("#GetCollisionNZ%collider%index", sgd_GetCollisionNZ);
 
-	// Picking
+	// Collider picking
 	rtSym("%CameraPick%camera#windowX#windowY%colliderMask", sgd_CameraPick);
 	rtSym("%LinePick#x0#y0#z0#x1#y1#z1#radius%colliderMask", sgd_LinePick);
 	rtSym("#GetPickedX", sgd_GetPickedX);
@@ -421,6 +435,19 @@ bool sgd_link( void (*rtSym)( const char *sym, void *pc ) ){
 	rtSym("#GetPickedNX", sgd_GetPickedNX);
 	rtSym("#GetPickedNY", sgd_GetPickedNY);
 	rtSym("#GetPickedNZ", sgd_GetPickedNZ);
+
+	// Render effects
+	rtSym("%CreateBloomEffect", sgd_CreateBloomEffect);
+	rtSym("%CreateBlurEffect", sgd_CreateBlurEffect);
+	rtSym("SetBlurEffectRadius%effect%radius", sgd_SetBlurEffectRadius);
+	rtSym("%CreateMonocolorEffect", sgd_CreateMonocolorEffect);
+	rtSym("SetMonocolorEffectColor%effect#red#green#blue#alpha", sgd_SetMonocolorEffectColor);
+	rtSym("%CreateFogEffect", sgd_CreateFogEffect);
+	rtSym("SetFogEffectColor%effect#red#green#blue#alpha", sgd_SetFogEffectColor);
+	rtSym("SetFogEffectRange%effect#near#far", sgd_SetFogEffectRange);
+	rtSym("SetFogEffectPower%effect#near#far", sgd_SetFogEffectPower);
+	rtSym("SetRenderEffectEnabled%effect%enabled", sgd_SetRenderEffectEnabled);
+	rtSym("%IsRenderEffectEnabled%effect%enabled", sgd_IsRenderEffectEnabled);
 
 	return true;
 }

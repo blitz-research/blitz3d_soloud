@@ -127,7 +127,11 @@ void MainFrame::setState( int n ){
 	state=n;
 	SendMessageToDescendants( WM_IDLEUPDATECMDUI,(WPARAM)TRUE,0,TRUE,TRUE );
 	if( shouldRun() ){
+#if BB_LIBSGD_ENABLED
+		if( HWND app=::FindWindowW( L"GLFW30",0 ) ){
+#else
 		if( HWND app=::FindWindow( "Blitz Runtime Class",0 ) ){
+#endif
 			::SetActiveWindow( app );
 		}
 	}else{
@@ -186,7 +190,7 @@ void MainFrame::debugStmt( int pos,const char *file ){
 
 	if( shouldRun() ) return;
 
-	::PostMessage( 0,WM_STOP,0,0 );
+	cmdStop();
 }
 
 void MainFrame::debugEnter( void *frame,void *env,const char *func ){
@@ -223,31 +227,43 @@ void MainFrame::debugSys( void *m ){
 }
 
 void MainFrame::cmdStop(){
-	::PostMessage( 0,WM_STOP,0,0 );
+	if( HWND hwnd=::FindWindow( "Blitz Runtime Class",0 ) ) {
+		::PostMessage( hwnd,WM_STOP,0,0 );
+	}
 }
 
 void MainFrame::cmdRun(){
-	step_level=-1;
-	::PostMessage( 0,WM_RUN,0,0 );
+	if( HWND hwnd=::FindWindow( "Blitz Runtime Class",0 ) ) {
+		step_level=-1;
+		::PostMessage( hwnd,WM_RUN,0,0 );
+	}
 }
 
 void MainFrame::cmdEnd(){
-	::PostMessage( 0,WM_END,0,0 );
-	setState( ENDING );
+	if( HWND hwnd=::FindWindow( "Blitz Runtime Class",0 ) ) {
+		::PostMessage( hwnd,WM_END,0,0 );
+		setState( ENDING );
+	}
 }
 
 void MainFrame::cmdStepOver(){
-	::PostMessage( 0,WM_RUN,0,0 );
+	if( HWND hwnd=::FindWindow( "Blitz Runtime Class",0 ) ) {
+		::PostMessage( hwnd,WM_RUN,0,0 );
+	}
 }
 
 void MainFrame::cmdStepInto(){
-	step_level=locals_tree.size()+1;
-	::PostMessage( 0,WM_RUN,0,0 );
+	if( HWND hwnd=::FindWindow( "Blitz Runtime Class",0 ) ) {
+		step_level=locals_tree.size()+1;
+		::PostMessage( hwnd,WM_RUN,0,0 );
+	}
 }
 
 void MainFrame::cmdStepOut(){
-	step_level=locals_tree.size()-1;
-	::PostMessage( 0,WM_RUN,0,0 );
+	if( HWND hwnd=::FindWindow( "Blitz Runtime Class",0 ) ) {
+		step_level=locals_tree.size()-1;
+		::PostMessage( 0,WM_RUN,0,0 );
+	}
 }
 
 SourceFile *MainFrame::sourceFile(const char *file){

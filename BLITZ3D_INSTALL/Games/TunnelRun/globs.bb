@@ -8,6 +8,9 @@
 ;
 
 ;meshes
+
+Global Font1 = LoadFont("C:\Windows\Fonts\arial.ttf",16)
+
 Global Tunnel_mesh
 Global Background
 Global Aster_mesh

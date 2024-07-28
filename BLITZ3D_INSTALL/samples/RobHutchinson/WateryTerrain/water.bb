@@ -92,6 +92,7 @@ Repeat
 	RenderWorld
 	
 	; Print some simple details on screen.
+		SetFont LoadFont( "C:\Windows\Fonts\Arial.ttf",16 )
 	Text 0,0,"W = Wireframe Toggle"
 	Text 0,12,"LOD = [ and ]  (" + curdetail + ")"
 	

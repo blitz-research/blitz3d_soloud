@@ -39,6 +39,7 @@ While Not KeyDown(1)
 
 	UpdateWorld
 	RenderWorld
+	SetFont(LoadFont("C:\Windows\Fonts\Arial.ttf",16))
 	Text 0,0,"Sphere LOD five levels. (c)David Bird. dave@birdie72.freeserve.co.uk"
 	Text 0,16,"W - for wireframe"
 	Text 0,32,"Up arrow increase detail"

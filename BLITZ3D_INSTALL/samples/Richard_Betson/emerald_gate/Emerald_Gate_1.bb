@@ -150,6 +150,7 @@ While Not KeyHit(1)
 	
 	If time>MilliSecs()
 		Color 255,0,0
+		SetFont(LoadFont("C:\Windows\Fonts\Arial.ttf",16))
 		Text 10,10,"Emerald Gate * Written By Richard Betson"
 		Text 10,25,"www.redeyeware.50megs.com"
 		Color 64,255,32

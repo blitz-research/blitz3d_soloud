@@ -13,6 +13,8 @@
 
 AppTitle "Wing Ring V1.0"
 
+Global Font = LoadFont("C:\Windows\Fonts\arial.ttf",16,1,0,0)
+
 Global width=640,height=480,depth=16,mode=1
 Graphics3D width,height,depth,mode
 SetBuffer BackBuffer()
@@ -258,6 +260,8 @@ End Type
 Include "menus.bb"
 Include "scenery.bb"
 Include "player2.bb"
+
+SetFont(Font)
 
 InitMenus()
 LoadMedia()

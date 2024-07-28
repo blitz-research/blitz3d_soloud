@@ -242,7 +242,7 @@ HidePointer
 ;EntityShininess chapel, 0
 
 disclaimer$ = "Run it at night or you won't see a thing :)"
-SetFont LoadFont ("arial")
+SetFont LoadFont ("C:\Windows\Fonts\arial.ttf")
 
 Repeat
 

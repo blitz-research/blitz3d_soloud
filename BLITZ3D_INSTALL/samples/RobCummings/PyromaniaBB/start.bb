@@ -8,6 +8,7 @@ Type GfxMode
 End Type
 
 Function Start3d_Kludge()
+   SetFont(LoadFont("C:\Windows\Fonts\Arial.ttf",16))
 	If Windowed3D()
 		yn$=Input$( "Use windowed mode?" )
 		If Left$( Lower$( yn$ ),1 )="y"

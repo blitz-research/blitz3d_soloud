@@ -87,6 +87,7 @@ While Not KeyHit(1)
 
 	UpdateWorld
 	RenderWorld
+	SetFont LoadFont( "C:\Windows\Fonts\Arial.ttf",16 )
 	Text 0,0,"Craft Flare: [By Rob Hutchinson 2001]"
 	k = 0
 	Flip 

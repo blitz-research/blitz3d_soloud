@@ -256,6 +256,7 @@ RenderWorld ;.90
 
 
 If time>MilliSecs()
+SetFont(LoadFont("C:\Windows\Fonts\Arial.ttf",16))
 	Color 255,255,255
 	Text 10,10,"Orbit The Nebula"
 	Text 10,25,"Orbit The Nebula Demo 1.0 by Richard Betson"

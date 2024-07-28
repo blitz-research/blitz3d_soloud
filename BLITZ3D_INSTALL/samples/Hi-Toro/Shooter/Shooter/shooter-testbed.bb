@@ -309,6 +309,8 @@ Repeat
 	; -----------------------------------------------------------
 	; Instructions...
 	; -----------------------------------------------------------
+	
+	SetFont(LoadFont("C:/Windows/Fonts/Arial.ttf",16))
 
 	Text 20, GraphicsHeight () - 60, "Cursors to move"
 	Text 20, GraphicsHeight () - 40, "Right mouse button to accelerate"

@@ -195,6 +195,7 @@ While Not KeyHit(1)
 
 	If displayinfo
 		Color 255,255,255
+			SetFont LoadFont( "C:\Windows\Fonts\Arial.ttf",16 )
 		Text 0,00,"FPS     : "+fps
 		Color 100,100,100
 		Text GraphicsWidth()/2,0,"Flares : "+particlecount,True
@@ -224,6 +225,7 @@ EndGraphics
 End
 
 Function SoftStart3D()
+	SetFont LoadFont( "C:\Windows\Fonts\Arial.ttf",16 )
 	; Retreive default values
 	LoadINI("startup.ini")
 	GxWidth=GetINIVal("gxwidth",800)

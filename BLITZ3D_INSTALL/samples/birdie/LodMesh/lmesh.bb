@@ -29,6 +29,7 @@ While Not KeyDown(1)
 	tri_s=CountTriangles(GetSurface(mesh,CountSurfaces(mesh)))
 	UpdateWorld
 	RenderWorld
+	SetFont(LoadFont("C:\Windows\Fonts\Arial.ttf",16))
 	Text 0,0,"Lod Mesh. (c)2001 David Bird, dave@birdie72.freeserve.co.uk"
 	Text 0,16,"Press space to reduce triangles in mesh"
 	Text 0,32,"Current triangle count="+tri_s

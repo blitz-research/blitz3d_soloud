@@ -2,6 +2,7 @@
 SetGfx()
 
 Function SetGfx()
+	SetFont LoadFont( "C:\Windows\Fonts\Arial.ttf",16 )
 	Print info1$:Print info2$:Print info3$:Print info4$:Print
 	If Windowed3D()
 		yn$=Input$( "Use windowed mode?" )

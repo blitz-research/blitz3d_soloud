@@ -81,6 +81,7 @@ While Not KeyDown(1)
 			
 	UpdateWorld
 	RenderWorld
+	SetFont(LoadFont("C:\Windows\Fonts\Arial.ttf",16))
 	Text 0,0,"Press <Space> to randomize tiles"
 	Flip
 Wend

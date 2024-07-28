@@ -1,3 +1,5 @@
+
+	SetFont LoadFont( "C:\Windows\Fonts\Arial.ttf",16 )
 name$=Input("Filename: ")
 Print name
 If Right(name,3)=".bb" Then name=Left(name,Len(name)-3)

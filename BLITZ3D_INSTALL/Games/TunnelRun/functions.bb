@@ -6,6 +6,8 @@
 ;	EFX functions smoke first
 ;
 
+SetFont(Font1)
+
 Function Update_Smoke()
 	For a.smoke=Each smoke
 		TranslateEntity a\ent,0,0,-EFX_SPEED
@@ -439,6 +441,9 @@ End Function
 
 ;View Update (players)
 Function Update_Players_Views()
+   
+   SetFont(Font1)
+
 	For a.play=Each play
 		Color 255,255,255
 		Text a\tlx,a\tly,a\score

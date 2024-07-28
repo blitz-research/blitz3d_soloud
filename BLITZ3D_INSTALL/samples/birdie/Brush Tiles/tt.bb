@@ -11,7 +11,6 @@ Const Gridz=32
 Global Tile_mask
 Global Lightmap
 
-
 ;Setup 3d graphics mode
 Graphics3D 640,480
 SetBuffer BackBuffer()
@@ -54,6 +53,7 @@ EntityParent sky,cam
 
 
 While Not KeyDown(1)
+   
 	TranslateEntity cam,0,-.5,0	;Translate the camera down **Gravity**
 	RotateEntity sky,0,0,0,True	;rotate the skybox true to the scene
 	If KeyDown(203) TurnEntity cam,0,1,0
@@ -65,6 +65,8 @@ While Not KeyDown(1)
 	If KeyDown(30) MoveEntity cam,0,0,2
 	UpdateWorld
 	RenderWorld
+	
+	SetFont(LoadFont("C:\Windows\Fonts\Arial.ttf",16))
 	Text 0,0,"Terrain brush tiling by"
 	Text 0,16,"David Bird"
 	Text 0,32,"dave@birdie72.freeserve.co.uk"

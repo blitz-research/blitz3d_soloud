@@ -16,6 +16,7 @@
 ;
 
 ; Ok here we have a lot of menu stuff.
+SetFont(LoadFont("C:\Windows\Fonts\Arial.ttf",16))
 Print "[Blox&Spheres V1.07]"
 Print "Written by Rob Hutchinson 2000 - 2001"
 
@@ -492,7 +493,6 @@ Function TrimFloat$(flt#,trimto = 3)
 	start$ = Mid$(fltstr$,1,decpnt)
 	Return start$ + Left$(dec$,trimto)
 End Function
-
 
 
 

@@ -26,6 +26,7 @@ While Not KeyDown(1)
 	Update_Particles()
 	UpdateWorld
 	RenderWorld
+	SetFont(LoadFont("C:\Windows\Fonts\Arial.ttf",16))
 	Text 0,0,"Hit <space> to blow up the sphere!"
 	Flip
 Wend

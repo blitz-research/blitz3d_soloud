@@ -334,6 +334,8 @@ Repeat
 	mph# = (sceneSpeed# * 300.0)+(Cos(deg#)*(sceneSpeed#*20)) - Abs(craftPitch#/5) - Abs(craftRoll#/5)
 	deg#=deg#+1.2
 	
+		SetFont LoadFont( "C:\Windows\Fonts\Arial.ttf",16 )
+	
 	Text 0,0,"SCORE: " + Int(playerScore)
 	Text 0,15,"DISTANCE FROM CENTER OF RING: " + dist
 	Text 0,40,"THRUST: " + playerThrust + "/" + playerThrustMax

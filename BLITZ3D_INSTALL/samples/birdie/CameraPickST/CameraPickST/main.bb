@@ -74,6 +74,7 @@ While Not KeyDown(1)
 		End If
 	End If
 	Plot MouseX(),MouseY()
+	SetFont(LoadFont("C:\Windows\Fonts\Arial.ttf",16))
 	Text 0,0,"Click left mouse on an entity to swell it at that point"
 	Text 0,15,"Click right mouse on an entity to paint the vertices of that triangle"
 	Text 0,30,"Press 1 to toggle wireframe"

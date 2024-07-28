@@ -194,6 +194,7 @@ While Not KeyHit(1)
 	; FPS
 	frames=frames+1
 	If MilliSecs()-render_time=>1000 Then fps=frames : frames=0 : render_time=MilliSecs()	
+		SetFont LoadFont( "C:\Windows\Fonts\Arial.ttf",16 )
 	Text 0,0,fps
 	
 	Flip

@@ -184,6 +184,7 @@ While Not KeyHit(1)
 	UpdateWorld
 	RenderWorld
 		If time>MilliSecs()
+		SetFont(LoadFont("C:\Windows\Fonts\Arial.ttf",16))
 		Color 255,0,0
 		Text 10,10,"Power Fountain * Written By Richard Betson"
 		Text 10,25,"www.redeyeware.50megs.com"

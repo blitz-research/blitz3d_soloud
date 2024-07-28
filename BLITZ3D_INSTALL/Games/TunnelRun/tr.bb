@@ -12,6 +12,8 @@ SetBuffer BackBuffer()
 Include "globs.bb"
 Include "functions.bb"
 
+SetFont(Font1)
+
 ChangeDir "Media"
 ;
 ;Set Up collision Constants here.
@@ -23,7 +25,6 @@ Const TYPE_TUNNEL=50
 Const TYPE_ASTER=51
 Const TYPE_ASTERPOLY=52
 Const TYPE_CLAW=53
-
 
 ;
 ;
@@ -870,6 +871,8 @@ Function Get_GFX_Modes()
 End Function
 
 Function Set_GFXMode()
+
+   SetFont(Font1)
 	m.GfxMode=First GfxMode
 	For r=1 To G_CurrentGFX
 		m=After m

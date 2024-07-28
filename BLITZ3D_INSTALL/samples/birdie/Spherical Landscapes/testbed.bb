@@ -35,6 +35,7 @@ While Not KeyDown(1)
 	If KeyDown(30) MoveEntity cam,0,0,0.1
 	UpdateWorld
 	RenderWorld
+	SetFont(LoadFont("C:\Windows\Fonts\Arial.ttf",16))
 	Text 320,0,ok,1,0
 	Text 0,0,"Hit <space> to terraform..."
 	Flip

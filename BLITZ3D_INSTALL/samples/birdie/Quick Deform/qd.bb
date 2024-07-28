@@ -27,6 +27,7 @@ While Not KeyDown(1)
 	If KeyHit(4) Then Add_Flats(mesh,.75,.75,.75,0,0)
 	UpdateWorld
 	RenderWorld
+	SetFont(LoadFont("C:\Windows\Fonts\Arial.ttf",16))
 	Text 0,0,"1- wave effect +"
 	Text 0,15,"2- wave effect -"
 	Text 0,30,"3- Add Flats"

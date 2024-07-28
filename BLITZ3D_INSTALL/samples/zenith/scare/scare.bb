@@ -4,7 +4,7 @@ AmbientLight 120,120,90
 
 Global up=17,down=31,Right=32,Left=30,esc=1,mx,my
 Global timer=CreateTimer(60)
-Global init=MilliSecs(),frames#=0,fps=0,font=LoadFont("verdana")
+Global init=MilliSecs(),frames#=0,fps=0
 
 Global grav#=.3,mxspd#=1.4,myspd#=1.4,friction#=.04
 
@@ -95,6 +95,7 @@ While Not KeyDown(esc)
 	Next
 	Cls
 	RenderWorld
+		SetFont LoadFont( "C:\Windows\Fonts\Arial.ttf",16 )
 	RenderGame()
 	fps = frames#/(MilliSecs()-init)*1000
 	Flip : frames#=frames#+1

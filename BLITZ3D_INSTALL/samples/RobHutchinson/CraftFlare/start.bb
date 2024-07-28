@@ -13,7 +13,6 @@ Function Logo()
 	If image=0 image=LoadImage( "../b3dlogo.jpg" )
 	MidHandle image
 	Color 255,0,0
-	SetFont LoadFont( "helvetica",16 )
 	t=MilliSecs()
 	txt1$="(C)opyright Blitz Research Limited"
 	txt2$="Published by Guildhall Leisure Services"
@@ -57,6 +56,7 @@ Function Logo()
 End Function
 
 Function SetGfx()
+	SetFont LoadFont( "C:\Windows\Fonts\Arial.ttf",16 )
 	Print info1$:Print info2$:Print info3$:Print info4$:Print
 	If Windowed3D()
 		yn$=Input$( "Use windowed mode?" )

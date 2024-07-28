@@ -34,7 +34,7 @@ Color 0,0,0
 ;Color 255,255,255
 Rect 1,1,62,62,1
 
-font=LoadFont("Arial",18,False,False,False)
+font=LoadFont("C:\Windows\Fonts\Arial.ttf",18,False,False,False)
 SetFont font
 ;texture2=CreateTexture(64,64,1)
 ;SetBuffer TextureBuffer(texture2)

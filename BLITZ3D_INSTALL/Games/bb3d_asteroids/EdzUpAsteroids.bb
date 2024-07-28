@@ -6,9 +6,9 @@ SetBuffer BackBuffer()
 
 SeedRnd MilliSecs()      ;setup random numbers
 
-Global ArialLarge=LoadFont("arial",72,1,0,0)
-Global ArialMid=LoadFont("arial",48,1,0,0)
-Global Arial=LoadFont("arial",14,0,0,0)
+Global ArialLarge=LoadFont("C:\Windows\Fonts\arial.ttf",72,1,0,0)
+Global ArialMid=LoadFont("C:\Windows\Fonts\arial.ttf",48,1,0,0)
+Global Arial=LoadFont("C:\Windows\Fonts\arial.ttf",14,0,0,0)
 
 Global Explode = LoadSound("Explode.wav")      ;Asteroid Explosion
 Global ShipExplode = LoadSound("Explode1.wav") ;ship Explosion

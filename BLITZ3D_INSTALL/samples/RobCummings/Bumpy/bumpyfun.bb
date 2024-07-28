@@ -24,6 +24,7 @@ While Not KeyHit(1)
 	UpdateBump()
 	UpdateWorld
 	RenderWorld
+	SetFont(LoadFont("C:\Windows\Fonts\Arial.ttf",16))
 	Text 0,0,"Move mouse to see bump effect!"
 	Flip
 Wend

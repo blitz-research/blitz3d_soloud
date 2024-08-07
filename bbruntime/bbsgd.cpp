@@ -48,7 +48,7 @@ namespace {
 		return material;
 	}
 
-	SGD_Mesh loadMesh(BBStr *path) {
+	SGD_Mesh SGD_DECL loadMesh(BBStr *path) {
 		auto mesh = sgd_LoadMesh(path->c_str());
 		delete path;
 
@@ -137,12 +137,25 @@ namespace {
 
 		return sound;
 	}
+
+	BBStr* getEntityName(SGD_Entity entity) {
+		return new BBStr(sgd_GetEntityName(entity));
+	}
+
+	void setWindowTitle(BBStr* title) {
+		sgd_SetWindowTitle(title->c_str());
+		delete title;
+	}
+
+	BBStr* getWindowTitle() {
+		return new BBStr(sgd_GetWindowTitle());
+	}
 }
 
 bool sgd_create() {
 
 	sgd_SetConfigVar("log.stdoutEnabled","0");
-	sgd_SetConfigVar("dawn.backendType","D3D12");
+	sgd_SetConfigVar("dawn.backendType","D3D11");
 
 	sgd_Init();
 	sgd_SetErrorHandler(errorHandler, nullptr);
@@ -166,8 +179,17 @@ bool sgd_link(void (*rtSym)(const char *sym, void *pc)) {
 	// Window
 	rtSym("CreateWindow%width%height$title%flags", createWindow);
 	rtSym("DestroyWindow", sgd_DestroyWindow);
+	rtSym("SetWindowTitle$title", setWindowTitle);
+	rtSym("$GetWindowTitle", getWindowTitle);
+	rtSym("SetWindowPosition%x%y",sgd_SetWindowPosition);
+	rtSym("%GetWindowX", sgd_GetWindowX);
+	rtSym("%GetWindowY", sgd_GetWindowY);
+	rtSym("SetWindowSize%width%height", sgd_SetWindowSize);
 	rtSym("%GetWindowWidth", sgd_GetWindowWidth);
 	rtSym("%GetWindowHeight", sgd_GetWindowHeight);
+	rtSym("SetFullscreenMode%width%height%refreshRate", sgd_SetFullscreenMode);
+	rtSym("SetWindowState%state", sgd_SetWindowState);
+	rtSym("%GetWindowState", sgd_GetWindowState);
 
 	// User input
 	rtSym("%IsKeyDown%key", sgd_IsKeyDown);
@@ -214,8 +236,8 @@ bool sgd_link(void (*rtSym)(const char *sym, void *pc)) {
 	rtSym("%CreateConeMesh#length#radius%segs%material", sgd_CreateConeMesh);
 	rtSym("%CreateTorusMesh#outerRadius#innerRadius%outerSegs%innerSegs%material", sgd_CreateTorusMesh);
 	rtSym("%CopyMesh%mesh", sgd_CopyMesh);
-	rtSym("SetMeshShadowCastingEnabled%mesh%enabled", sgd_SetMeshShadowCastingEnabled);
-	rtSym("%IsMeshShadowCastingEnabled%mesh", sgd_IsMeshShadowCastingEnabled);
+	rtSym("SetMeshShadowsEnabled%mesh%enabled", sgd_SetMeshShadowsEnabled);
+	rtSym("%IsMeshShadowsEnabled%mesh", sgd_IsMeshShadowsEnabled);
 	rtSym("UpdateMeshNormals%mesh", sgd_UpdateMeshNormals);
 	rtSym("UpdateMeshTangents%mesh", sgd_UpdateMeshTangents);
 	rtSym("FitMesh%mesh#minX#minY#minZ#maxX#maxY#maxZ%uniform", sgd_FitMesh);
@@ -225,22 +247,41 @@ bool sgd_link(void (*rtSym)(const char *sym, void *pc)) {
 
 	// Mesh editing - vertices
 	rtSym("%CreateMesh%vertexCount%meshFlags", sgd_CreateMesh);
-	rtSym("%ResizeMeshVertices%mesh%vertexCount", sgd_ResizeMeshVertices);
-	rtSym("%AddMeshVertex%mesh#x#y#z#nx#ny#nz#s#t", sgd_AddMeshVertex);
-	rtSym("%GetMeshVertexCount%mesh", sgd_GetMeshVertexCount);
-	rtSym("SetMeshVertex%mesh%vertex#x#y#z#nx#ny#nz#s#t", sgd_SetMeshVertex);
-	rtSym("SetMeshVertexPosition%mesh%vertex#x#y#z", sgd_SetMeshVertexPosition);
-	rtSym("SetMeshVertexNormal%mesh%vertex#nx#ny#nz", sgd_SetMeshVertexNormal);
-	rtSym("SetMeshVertexTangent%mesh%vertex#tx#ty#tz#tw", sgd_SetMeshVertexTangent);
-	rtSym("SetMeshVertexTexCoords%mesh%vertex#s#t", sgd_SetMeshVertexTexCoords);
-	rtSym("SetMeshVertexColor%mesh%vertex#r#g#b#a", sgd_SetMeshVertexColor);
+	rtSym("%ResizeVertices%mesh%vertexCount", sgd_ResizeVertices);
+	rtSym("%AddVertex%mesh#x#y#z#nx#ny#nz#s#t", sgd_AddVertex);
+	rtSym("%GetVertexCount%mesh", sgd_GetVertexCount);
+	rtSym("SetVertex%mesh%vertex#x#y#z#nx#ny#nz#s#t", sgd_SetVertex);
+	rtSym("SetVertexPosition%mesh%vertex#x#y#z", sgd_SetVertexPosition);
+	rtSym("SetVertexNormal%mesh%vertex#nx#ny#nz", sgd_SetVertexNormal);
+	rtSym("SetVertexTangent%mesh%vertex#tx#ty#tz#tw", sgd_SetVertexTangent);
+	rtSym("SetVertexTexCoord0%mesh%vertex#s#t", sgd_SetVertexTexCoord0);
+	rtSym("SetVertexColor%mesh%vertex#r#g#b#a", sgd_SetVertexColor);
+	rtSym("#GetVertexX", sgd_GetVertexX);
+	rtSym("#GetVertexY", sgd_GetVertexY);
+	rtSym("#GetVertexZ", sgd_GetVertexZ);
+	rtSym("#GetVertexNX", sgd_GetVertexNX);
+	rtSym("#GetVertexNY", sgd_GetVertexNY);
+	rtSym("#GetVertexNZ", sgd_GetVertexNZ);
+	rtSym("#GetVertexTX", sgd_GetVertexTX);
+	rtSym("#GetVertexTY", sgd_GetVertexTY);
+	rtSym("#GetVertexTZ", sgd_GetVertexTZ);
+	rtSym("#GetVertexTW", sgd_GetVertexTW);
+	rtSym("#GetVertexRed", sgd_GetVertexRed);
+	rtSym("#GetVertexGreen", sgd_GetVertexGreen);
+	rtSym("#GetVertexBlue", sgd_GetVertexBlue);
+	rtSym("#GetVertexAlpha", sgd_GetVertexAlpha);
+	rtSym("#GetVertexU0", sgd_GetVertexU0);
+	rtSym("#GetVertexV0", sgd_GetVertexV0);
 
 	// Surfaces
 	rtSym("%CreateSurface%mesh%triangleCount%material", sgd_CreateSurface);
-	rtSym("ResizeSurfaceTriangles%surface%triangleCount", sgd_ResizeSurfaceTriangles);
-	rtSym("%AddSurfaceTriangle%surface%vertex0%vertex1%vertex2", sgd_AddSurfaceTriangle);
-	rtSym("%GetSurfaceTriangleCount%surface", sgd_GetSurfaceTriangleCount);
-	rtSym("SetSurfaceTriangle%surface%triangle%vertex0%vertex1%vertex2", sgd_SetSurfaceTriangle);
+	rtSym("%GetSurfaceCount%mesh", sgd_GetSurfaceCount);
+	rtSym("%GetSurface%mesh%surface", sgd_GetSurface);
+	rtSym("%ResizeTriangles%surface%triangleCount", sgd_ResizeTriangles);
+	rtSym("%AddTriangle%surface%vertex0%vertex1%vertex2", sgd_AddTriangle);
+	rtSym("%GetTriangleCount%surface", sgd_GetTriangleCount);
+	rtSym("SetTriangle%surface%triangle%vertex0%vertex1%vertex2", sgd_SetTriangle);
+	rtSym("%GetTriangleVertex%surface%triangle%vertex", sgd_GetTriangleVertex);
 
 	// Font
 	rtSym("%LoadFont$path#height", loadFont);
@@ -303,13 +344,17 @@ bool sgd_link(void (*rtSym)(const char *sym, void *pc)) {
 
 	rtSym("SetCSMTextureSize%textureSize", sgd_SetCSMTextureSize);
 	rtSym("SetMaxCSMLights%maxLights", sgd_SetMaxCSMLights);
-	rtSym("SetPSMTextureSize%textureSize", sgd_SetPSMTextureSize);
-	rtSym("SetMaxPSMLights%maxLights", sgd_SetMaxPSMLights);
 	rtSym("SetCSMSplitDistances#split0#split1#split2#splt3", sgd_SetCSMSplitDistances);
 	rtSym("SetCSMClipRange#clipRange", sgd_SetCSMClipRange);
 	rtSym("SetCSMDepthBias#depthBias", sgd_SetCSMDepthBias);
+	rtSym("SetPSMTextureSize%textureSize", sgd_SetPSMTextureSize);
+	rtSym("SetMaxPSMLights%maxLights", sgd_SetMaxPSMLights);
 	rtSym("SetPSMClipNear#clipNear", sgd_SetPSMClipNear);
 	rtSym("SetPSMDepthBias#depthBias", sgd_SetPSMDepthBias);
+	rtSym("SetSSMTextureSize%textureSize", sgd_SetSSMTextureSize);
+	rtSym("SetMaxSSMLights%maxLights", sgd_SetMaxSSMLights);
+	rtSym("SetSSMClipNear#clipNear", sgd_SetSSMClipNear);
+	rtSym("SetSSMDepthBias#depthBias", sgd_SetSSMDepthBias);
 
 	rtSym("RenderScene", sgd_RenderScene);
 	rtSym("Present", sgd_Present);
@@ -324,8 +369,13 @@ bool sgd_link(void (*rtSym)(const char *sym, void *pc)) {
 	rtSym("DestroyEntity%entity", sgd_DestroyEntity);
 	rtSym("%CopyEntity%entity", sgd_CopyEntity);
 	rtSym("ResetEntity%entity", sgd_ResetEntity);
+	rtSym("SetEntityName", sgd_SetEntityName);
+	rtSym("$GetEntityName", getEntityName);
 	rtSym("SetEntityParent%entity%parent", sgd_SetEntityParent);
 	rtSym("%GetEntityParent%entity", sgd_GetEntityParent);
+	rtSym("%GetEntityChildCount%entity", sgd_GetEntityChildCount);
+	rtSym("%GetEntityChild%entity%childIndex", sgd_GetEntityChild);
+	rtSym("%FindEntityChild%entity$childName", sgd_FindEntityChild);
 	rtSym("SetEntityPosition%entity#x#y#z", sgd_SetEntityPosition);
 	rtSym("SetEntityRotation%entity#rx#ry#rz", sgd_SetEntityRotation);
 	rtSym("SetEntityScale%entity#sx#sy#sz", sgd_SetEntityScale);
@@ -384,8 +434,8 @@ bool sgd_link(void (*rtSym)(const char *sym, void *pc)) {
 	rtSym("SetLightFalloff%light#falloff", sgd_SetLightFalloff);
 	rtSym("SetLightInnerConeAngle%light#angle", sgd_SetLightInnerConeAngle);
 	rtSym("SetLightOuterConeAngle%light#angle", sgd_SetLightOuterConeAngle);
-	rtSym("SetLightShadowMappingEnabled%light%enabled", sgd_SetLightShadowMappingEnabled);
-	rtSym("%IsLightShadowMappingEnabled%light", sgd_IsLightShadowMappingEnabled);
+	rtSym("SetLightShadowsEnabled%light%enabled", sgd_SetLightShadowsEnabled);
+	rtSym("%IsLightShadowsEnabled%light", sgd_IsLightShadowsEnabled);
 	rtSym("SetLightPriority%light%priority", sgd_SetLightPriority);
 
 	// Model
@@ -445,7 +495,7 @@ bool sgd_link(void (*rtSym)(const char *sym, void *pc)) {
 	rtSym("%CreateFogEffect", sgd_CreateFogEffect);
 	rtSym("SetFogEffectColor%effect#red#green#blue#alpha", sgd_SetFogEffectColor);
 	rtSym("SetFogEffectRange%effect#near#far", sgd_SetFogEffectRange);
-	rtSym("SetFogEffectPower%effect#near#far", sgd_SetFogEffectPower);
+	rtSym("SetFogEffectPower%effect#power", sgd_SetFogEffectPower);
 	rtSym("SetRenderEffectEnabled%effect%enabled", sgd_SetRenderEffectEnabled);
 	rtSym("%IsRenderEffectEnabled%effect%enabled", sgd_IsRenderEffectEnabled);
 

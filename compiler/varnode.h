@@ -30,7 +30,8 @@ struct DeclVarNode : public VarNode{
 
 struct IdentVarNode : public DeclVarNode{
 	string ident,tag;
-	IdentVarNode( const string &i,const string &t ):ident(i),tag(t){}
+	bool mustExist;
+	IdentVarNode( const string &i,const string &t,bool mustExist ):ident(i),tag(t),mustExist(mustExist){}
 	void semant( Environ *e );
 };
 

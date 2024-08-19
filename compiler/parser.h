@@ -19,6 +19,14 @@ public:
 	ProgNode *parse( const string &main );
 
 private:
+	enum Dialect {
+		DIALECT_CLASSIC,
+		DIALECT_SECURE,
+		DIALECT_MODERN,
+
+	};
+	Dialect dialect = DIALECT_CLASSIC;
+
 	string incfile;
 	set<string> included;
 	Toker *toker,*main_toker;
@@ -39,8 +47,8 @@ private:
 	void parseChar( int c );
 	string parseTypeTag();
 
-	VarNode *parseVar();
-	VarNode *parseVar( const string &ident,const string &tag );
+	VarNode *parseVar(bool mustExist=false);
+	VarNode *parseVar( const string &ident,const string &tag,bool mustExist=false );
 	CallNode *parseCall( const string &ident,const string &tag );
 	IfNode *parseIf();
 

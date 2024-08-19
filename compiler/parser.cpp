@@ -1,4 +1,6 @@
 
+// clang-format off
+
 #include "std.h"
 #include <cstdlib>
 #include "parser.h"
@@ -67,8 +69,33 @@ void Parser::parseChar( int c ){
 }
 
 StmtSeqNode *Parser::parseStmtSeq( int scope ){
+
+	Dialect prevDialect = dialect;
+
+	if( scope == STMTS_PROG) {
+		while (toker->curr() == '\n') toker->next();
+		if(toker->curr()==DIALECT) {
+			if( toker->next()!=STRINGCONST ) exp( "dialect identifier" );
+			string name=toker->text();toker->next();
+			if(name=="\"classic\"") {
+				dialect = DIALECT_CLASSIC;
+			}else if(name=="\"secure\"") {
+				dialect = DIALECT_SECURE;
+			}else if(name=="\"modern\"") {
+				dialect = DIALECT_MODERN;
+			}else{
+				ex("Unrecognized dialect '" + name + "'");
+			}
+		}else{
+			dialect = DIALECT_CLASSIC;
+		}
+	}
+
 	a_ptr<StmtSeqNode> stmts( d_new StmtSeqNode( incfile ) );
 	parseStmtSeq( stmts,scope );
+
+	dialect = prevDialect;
+
 	return stmts.release();
 }
 
@@ -81,6 +108,11 @@ void Parser::parseStmtSeq( StmtSeqNode *stmts,int scope ){
 		int pos=toker->pos();
 
 		switch( toker->curr() ){
+		case DIALECT:
+			{
+				ex("'Dialect' must appear only once at top of program file");
+			}
+			break;
 		case INCLUDE:
 			{
 				if( toker->next()!=STRINGCONST ) exp( "include filename" );
@@ -117,8 +149,8 @@ void Parser::parseStmtSeq( StmtSeqNode *stmts,int scope ){
 			{
 				string ident=toker->text();
 				toker->next();string tag=parseTypeTag();
-				if( arrayDecls.find(ident)==arrayDecls.end() 
-					&& toker->curr()!='=' && toker->curr()!='\\' && toker->curr()!='[' ){
+				bool isDot = (dialect==DIALECT_MODERN && toker->curr()=='.') || (dialect!=DIALECT_MODERN && toker->curr()=='\\');
+				if( arrayDecls.find(ident)==arrayDecls.end() && toker->curr()!='=' && !isDot && toker->curr()!='[' ){
 					//must be a function
 					ExprSeqNode *exprs;
 					if( toker->curr()=='(' ){
@@ -208,7 +240,8 @@ void Parser::parseStmtSeq( StmtSeqNode *stmts,int scope ){
 			{
 				a_ptr<VarNode> var;
 				a_ptr<StmtSeqNode> stmts;
-				toker->next();var=parseVar();
+				toker->next();
+				var=parseVar();
 				if( toker->curr()!='=' ) exp( "variable assignment" );
 				if( toker->next()==EACH ){
 					toker->next();
@@ -347,7 +380,6 @@ void Parser::parseStmtSeq( StmtSeqNode *stmts,int scope ){
 		default:
 			return;
 		}
-
 		if( result ){
 			result->pos=pos;
 			stmts->push_back( result );
@@ -356,22 +388,22 @@ void Parser::parseStmtSeq( StmtSeqNode *stmts,int scope ){
 }
 
 string Parser::parseTypeTag(){
-	switch( toker->curr() ){
+	switch( toker->curr() ) {
 	case '%':toker->next();return "%";
 	case '#':toker->next();return "#";
 	case '$':toker->next();return "$";
-	case '.':toker->next();return parseIdent();
 	}
+	if((dialect==DIALECT_MODERN && toker->curr()==':') || (dialect!=DIALECT_MODERN && toker->curr()=='.')) {toker->next();return parseIdent();}
 	return "";
 }
 
-VarNode *Parser::parseVar(){
+VarNode *Parser::parseVar(bool mustExist){
 	string ident=parseIdent();
 	string tag=parseTypeTag();
-	return parseVar( ident,tag );
+	return parseVar( ident,tag,mustExist );
 }
 
-VarNode *Parser::parseVar( const string &ident,const string &tag ){
+VarNode *Parser::parseVar( const string &ident,const string &tag,bool mustExist ){
 	a_ptr<VarNode> var;
 	if( toker->curr()=='(' ){
 		toker->next();
@@ -379,10 +411,10 @@ VarNode *Parser::parseVar( const string &ident,const string &tag ){
 		if( toker->curr()!=')' ) exp( "')'" );
 		toker->next();
 		var=d_new ArrayVarNode( ident,tag,exprs.release() );
-	}else var=d_new IdentVarNode( ident,tag );
+	}else var=d_new IdentVarNode( ident,tag,mustExist );
 
 	for(;;){
-		if( toker->curr()=='\\' ){
+		if((dialect==DIALECT_MODERN && toker->curr()=='.') || (dialect!=DIALECT_MODERN && toker->curr()=='\\')){
 			toker->next();
 			string ident=parseIdent();
 			string tag=parseTypeTag();
@@ -456,7 +488,7 @@ DeclNode *Parser::parseFuncDecl(){
 	}
 	toker->next();
 	a_ptr<StmtSeqNode> stmts( parseStmtSeq( STMTS_BLOCK ) );
-	if( toker->curr()!=ENDFUNCTION ) exp( "'End Function'" );
+	if (toker->curr() != ENDFUNCTION && toker->curr() != END) exp("'End Function' or 'End'");
 	StmtNode *ret=d_new ReturnNode(0);ret->pos=toker->pos();
 	stmts->push_back( ret );toker->next();
 	DeclNode *d=d_new FuncDeclNode( ident,tag,params.release(),stmts.release() );
@@ -625,7 +657,11 @@ ExprNode *Parser::parseUniExpr( bool opt ){
 		result=d_new CastNode( result,Type::string_type );
 		break;
 	case OBJECT:
-		if( toker->next()=='.' ) toker->next();
+		if(dialect==DIALECT_MODERN){
+			if (toker->next() == ':') toker->next();
+		}else {
+			if (toker->next() == '.') toker->next();
+		}
 		t=parseIdent();
 		result=parseUniExpr( false );
 		result=d_new ObjectCastNode( result,t );
@@ -737,7 +773,7 @@ ExprNode *Parser::parsePrimary( bool opt ){
 			result=d_new CallNode( ident,tag,exprs.release() );
 		}else{
 			//must be a var
-			VarNode *var=parseVar( ident,tag );
+			VarNode *var=parseVar( ident,tag,dialect!=DIALECT_CLASSIC );
 			result=d_new VarExprNode( var );
 		}
 		break;

@@ -6,7 +6,7 @@
 
 static map<string,string> keyhelps;
 
-int linker_ver,runtime_ver;
+int compiler_ver,linker_ver,runtime_ver;
 
 static string execProc( const string &proc ){
 	HANDLE rd,wr;
@@ -50,7 +50,23 @@ int version( string vers,string t ){
 	int n=vers.find( t );n+=t.size();
 	int maj=atoi( vers.substr(n) );n=vers.find( '.',n )+1;
 	int min=atoi( vers.substr(n) );
-	return maj*100+min;
+	int v=maj*100+min;
+	n=vers.find( ':',n );
+	if(n!=string::npos) {
+		++n;
+		int e=vers.find( "\r\n",n );
+		if(e!=string::npos) {
+			string b = vers.substr(n, e - n);
+			if (b == "libsgd") {
+				v |= 0x30000;
+			} else if (b == "soloud") {
+				v |= 0x20000;
+			} else if (b == "fmod") {
+				v |= 0x10000;
+			}
+		}
+	}
+	return v;
 }
 
 void initLibs(){
@@ -62,6 +78,7 @@ void initLibs(){
 	}
 
 	string vers=tolower( execProc( prefs.homeDir+"/bin/blitzcc -v" ) );
+	compiler_ver=version( vers,"compiler" );
 	linker_ver=version( vers,"linker" );
 	runtime_ver=version( vers,"runtime" );
 

@@ -272,10 +272,6 @@ const char *openLibs(){
 	lnk_ver=linkerLib->version();
 	run_ver=runtimeLib->version();
 
-	if( (lnk_ver>>16)!=(bcc_ver>>16) ||
-		(run_ver>>16)!=(bcc_ver>>16) ||
-		(lnk_ver>>16)!=(bcc_ver>>16) ) return "Library version error";
-
 	runtimeLib->startup( GetModuleHandle(0) );
 
 	runtimeModule=linkerLib->createModule();

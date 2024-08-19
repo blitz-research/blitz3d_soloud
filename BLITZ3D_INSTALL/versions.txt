@@ -1,7 +1,32 @@
 
+***** V1.117 *****
+
+Added new Dialect keyword/command.
+
+Dialect "classic" is classic Blitz3D, the default if you don't specify a dialect.
+
+Dialect "secure" is classic Blitz3D, except you can no longer use 'undefined' variable names in expressions. In classic Blitz3D,
+doing this automatically creates a local variable for you, which can be very annoying and has been giving me grief all week!
+
+Dialect "modern" is secure Blitz3d, but with slightly more modern syntax. It allows you to use ':' instead of '.' to declare
+variable types, and '.' instead of '\' to access fields.
+
+Dialect must appear at the top of each source file you want it to affect, included files dont 'inherit' dialect form the file
+that included them.
+
+Also tweaked the IDE about box to provide more version details and runtime build type (LbSGD, SoLoud, FMOD).
+
+
+***** V1.116 *****
+
+Removed 'AppCompatData' hack that caused problems Alt-tabbing in full screen modes.
+
+Made LibSGD runtime more debugger friendly.
+
+
 ***** V1.115 *****
 
-Fixed SoLoud 3d using wrong coorinate system.
+Fixed SoLoud 3d using wrong coordinate system.
 
 Fixed PlayMusic.
 
@@ -13,7 +38,8 @@ FMOD files removed from repository.
 SoLoud audio module added.
 
 General tidy up.
- 
+General tidy up.
+
 
 ***** V1.113 *****
 

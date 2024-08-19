@@ -121,7 +121,15 @@ static void dumpKeys( bool lang,bool mod,bool help ){
 }
 
 static string verstr( int ver ){
-	return itoa((ver&65535)/100)+"."+itoa((ver&65535)%100);
+	string b;
+	if(ver>>16==3) {
+		b="LibSGD";
+	}else if(ver>>16==2){
+		b="SoLoud";
+	}else if(ver>>16==1){
+		b="FMOD";
+	}
+	return itoa((ver&0xffff)/100)+"."+itoa((ver&0xffff)%100)+":"+b;
 }
 
 static void versInfo(){
@@ -129,11 +137,6 @@ static void versInfo(){
 	cout<<"Runtime version:"<<verstr(run_ver)<<endl;
 	cout<<"Debugger version:"<<verstr(dbg_ver)<<endl;
 	cout<<"Linker version:"<<verstr(lnk_ver)<<endl;
-}
-
-static void demoError(){
-	cout<<"Compiler can not be used standalone in demo version."<<endl;
-	exit(0);
 }
 
 int _cdecl main( int argc,char *argv[] ){

@@ -298,13 +298,11 @@ BEGIN
     DEFPUSHBUTTON   "Okee Dokee!",IDOK,79,150,50,14
     CONTROL         132,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE,11,
                     5,64,32
-    CTEXT           "BlitzPlus - Demo Version",IDC_PRODUCT,78,7,139,8
-    CTEXT           "IDE V1.1  Runtime V1.1  Linker V1.1",IDC_VERSION,78,27,
+    CTEXT           "",IDC_PRODUCT,78,7,139,8
+	CTEXT           "",IDC_PRODUCT2,78,17,139,8
+    CTEXT           "",IDC_VERSION,78,27,
                     139,8
-    CTEXT           "Copyright Blitz Research Ltd",IDC_STATIC,78,17,139,8
-    CONTROL         "Progress1",IDC_PROGRESS1,"msctls_progress32",PBS_SMOOTH | 
-                    WS_BORDER,5,150,212,14
-    CONTROL         "",IDC_CREDITS,"RICHEDIT",ES_CENTER | ES_MULTILINE | 
+    CONTROL         "",IDC_CREDITS,"RICHEDIT",ES_CENTER | ES_MULTILINE |
                     ES_READONLY | WS_DISABLED | WS_BORDER | WS_TABSTOP,5,41,
                     212,104
 END
@@ -349,4 +347,3 @@ IDB_BITMAP2             BITMAP  DISCARDABLE     "b3dlogo.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 #endif    // not APSTUDIO_INVOKED
-

@@ -27,8 +27,22 @@ namespace {
 		delete value;
 	}
 
-	SGD_Texture loadTexture(BBStr *path, int format, int flags) {
-		auto texture = sgd_LoadTexture(path->c_str(), format, flags);
+	SGD_Texture load2DTexture(BBStr *path, int format, int flags) {
+		auto texture = sgd_Load2DTexture(path->c_str(), format, flags);
+		delete path;
+
+		return texture;
+	}
+
+	SGD_Texture loadCubeTexture(BBStr *path, int format, int flags) {
+		auto texture = sgd_LoadCubeTexture(path->c_str(), format, flags);
+		delete path;
+
+		return texture;
+	}
+
+	SGD_Texture loadArrayTexture(BBStr *path, int format, int flags) {
+		auto texture = sgd_LoadArrayTexture(path->c_str(), format, flags);
 		delete path;
 
 		return texture;
@@ -212,21 +226,33 @@ bool sgd_link(void (*rtSym)(const char *sym, void *pc)) {
 	rtSym("#GetGamepadAxis%gamepad%axis", sgd_GetGamepadAxis);
 
 	// Texture
-	rtSym("%LoadTexture$path%format%flags", loadTexture);
+	rtSym("%Load2DTexture$path%format%flags", load2DTexture);
+	rtSym("%LoadCubeTexture$path%format%flags", loadCubeTexture);
+	rtSym("%LoadArrayTexture$path%format%flags", loadArrayTexture);
+	rtSym("%Create2DTexture%width%height%format%flags", sgd_Create2DTexture);
+	rtSym("%CreateCubeTexture%size%format%flags", sgd_CreateCubeTexture);
+	rtSym("%CreateArrayTexture%width%height%depth%format%flags", sgd_CreateArrayTexture);
+	rtSym("%GetTextureWidth%texture", sgd_GetTextureWidth);
+	rtSym("%GetTextureHeight%texture", sgd_GetTextureHeight);
+	rtSym("%GetTextureDepth%texture", sgd_GetTextureDepth);
+	rtSym("%GetTextureWidth%texture", sgd_GetTextureFormat);
+	rtSym("%GetTextureWidth%texture", sgd_GetTextureFlags);
+	rtSym("SetTexelSRGBA%texture%x%y%rgba", sgd_SetTexelSRGBA);
+	rtSym("%GetTexelSRGBA%texture%x%y", sgd_GetTexelSRGBA);
 
 	// Material
-	rtSym("%CreatePBRMaterial", sgd_CreatePBRMaterial);
 	rtSym("%LoadPBRMaterial$path", loadPBRMaterial);
-	rtSym("%CreatePrelitMaterial", sgd_CreatePrelitMaterial);
+	rtSym("%CreatePBRMaterial", sgd_CreatePBRMaterial);
 	rtSym("%LoadPrelitMaterial$path", loadPrelitMaterial);
+	rtSym("%CreatePrelitMaterial", sgd_CreatePrelitMaterial);
 	rtSym("SetMaterialBlendMode%material%blendMode", sgd_SetMaterialBlendMode);
 	rtSym("SetMaterialDepthFunc%material%depthFunc", sgd_SetMaterialDepthFunc);
 	rtSym("SetMaterialCullMode%material%cullMode", sgd_SetMaterialCullMode);
+	rtSym("SetMaterialTexture%material$name%texture", setMaterialTexture);
 	rtSym("SetMaterialVector4f%material$name#x#y#z#a", setMaterialVector4f);
 	rtSym("SetMaterialVector3f%material$name#x#y#z", setMaterialVector3f);
 	rtSym("SetMaterialVector2f%material$name#x#y", setMaterialVector2f);
 	rtSym("SetMaterialFloat%material$name#n", setMaterialFloat);
-	rtSym("SetMaterialTexture%material$name%texture", setMaterialTexture);
 
 	// Mesh
 	rtSym("%LoadMesh$path", loadMesh);
@@ -254,29 +280,30 @@ bool sgd_link(void (*rtSym)(const char *sym, void *pc)) {
 	rtSym("SetVertexPosition%mesh%vertex#x#y#z", sgd_SetVertexPosition);
 	rtSym("SetVertexNormal%mesh%vertex#nx#ny#nz", sgd_SetVertexNormal);
 	rtSym("SetVertexTangent%mesh%vertex#tx#ty#tz#tw", sgd_SetVertexTangent);
-	rtSym("SetVertexTexCoord0%mesh%vertex#s#t", sgd_SetVertexTexCoord0);
+	rtSym("SetVertexTexCoord0%mesh%vertex#u0#v0", sgd_SetVertexTexCoord0);
 	rtSym("SetVertexColor%mesh%vertex#r#g#b#a", sgd_SetVertexColor);
-	rtSym("#GetVertexX", sgd_GetVertexX);
-	rtSym("#GetVertexY", sgd_GetVertexY);
-	rtSym("#GetVertexZ", sgd_GetVertexZ);
-	rtSym("#GetVertexNX", sgd_GetVertexNX);
-	rtSym("#GetVertexNY", sgd_GetVertexNY);
-	rtSym("#GetVertexNZ", sgd_GetVertexNZ);
-	rtSym("#GetVertexTX", sgd_GetVertexTX);
-	rtSym("#GetVertexTY", sgd_GetVertexTY);
-	rtSym("#GetVertexTZ", sgd_GetVertexTZ);
-	rtSym("#GetVertexTW", sgd_GetVertexTW);
-	rtSym("#GetVertexRed", sgd_GetVertexRed);
-	rtSym("#GetVertexGreen", sgd_GetVertexGreen);
-	rtSym("#GetVertexBlue", sgd_GetVertexBlue);
-	rtSym("#GetVertexAlpha", sgd_GetVertexAlpha);
-	rtSym("#GetVertexU0", sgd_GetVertexU0);
-	rtSym("#GetVertexV0", sgd_GetVertexV0);
+	rtSym("#GetVertexX%mesh%vertex", sgd_GetVertexX);
+	rtSym("#GetVertexY%mesh%vertex", sgd_GetVertexY);
+	rtSym("#GetVertexZ%mesh%vertex", sgd_GetVertexZ);
+	rtSym("#GetVertexNX%mesh%vertex", sgd_GetVertexNX);
+	rtSym("#GetVertexNY%mesh%vertex", sgd_GetVertexNY);
+	rtSym("#GetVertexNZ%mesh%vertex", sgd_GetVertexNZ);
+	rtSym("#GetVertexTX%mesh%vertex", sgd_GetVertexTX);
+	rtSym("#GetVertexTY%mesh%vertex", sgd_GetVertexTY);
+	rtSym("#GetVertexTZ%mesh%vertex", sgd_GetVertexTZ);
+	rtSym("#GetVertexTW%mesh%vertex", sgd_GetVertexTW);
+	rtSym("#GetVertexRed%mesh%vertex", sgd_GetVertexRed);
+	rtSym("#GetVertexGreen%mesh%vertex", sgd_GetVertexGreen);
+	rtSym("#GetVertexBlue%mesh%vertex", sgd_GetVertexBlue);
+	rtSym("#GetVertexAlpha%mesh%vertex", sgd_GetVertexAlpha);
+	rtSym("#GetVertexU0%mesh%vertex", sgd_GetVertexU0);
+	rtSym("#GetVertexV0%mesh%vertex", sgd_GetVertexV0);
 
 	// Surfaces
 	rtSym("%CreateSurface%mesh%triangleCount%material", sgd_CreateSurface);
 	rtSym("%GetSurfaceCount%mesh", sgd_GetSurfaceCount);
 	rtSym("%GetSurface%mesh%surface", sgd_GetSurface);
+	rtSym("%GetSurfaceMaterial%surface", sgd_GetSurfaceMaterial);
 	rtSym("%ResizeTriangles%surface%triangleCount", sgd_ResizeTriangles);
 	rtSym("%AddTriangle%surface%vertex0%vertex1%vertex2", sgd_AddTriangle);
 	rtSym("%GetTriangleCount%surface", sgd_GetTriangleCount);
@@ -290,13 +317,11 @@ bool sgd_link(void (*rtSym)(const char *sym, void *pc)) {
 
 	// Image
 	rtSym("%LoadImage$path%depth", loadImage);
+	rtSym("%CreateImage%texture", sgd_CreateImage);
 	rtSym("SetImageViewMode%image%viewMode", sgd_SetImageViewMode);
-	rtSym("SetImageSpriteRect%image#minX#minY#maxX#maxY", sgd_SetImageRect);
 	rtSym("SetImageBlendMode%image%blendMode", sgd_SetImageBlendMode);
-	rtSym("SetImage2DHandle%image#x#y", sgd_SetImage2DHandle);
-	rtSym("%GetImageWidth%image", sgd_GetImageWidth);
-	rtSym("%GetImageHeight%image", sgd_GetImageHeight);
-	rtSym("%GetImageDepth%image", sgd_GetImageDepth);
+	rtSym("SetImageRect%image#minX#minY#maxX#maxY", sgd_SetImageRect);
+	rtSym("%GetImagetexture%image", sgd_GetImageTexture);
 
 	// 2D Overlay state
 	rtSym("Set2DFillColor#red#green#blue#alpha", sgd_Set2DFillColor);
@@ -363,14 +388,14 @@ bool sgd_link(void (*rtSym)(const char *sym, void *pc)) {
 
 	// Entity
 	rtSym("SetEntityEnabled%entity%enabled", sgd_SetEntityEnabled);
-	rtSym("%GetEntityEnabled%entity", sgd_IsEntityEnabled);
+	rtSym("%IsEntityEnabled%entity", sgd_IsEntityEnabled);
 	rtSym("SetEntityVisible%entity%visible", sgd_SetEntityVisible);
-	rtSym("%GetEntityVisible%entity", sgd_IsEntityVisible);
+	rtSym("%IsEntityVisible%entity", sgd_IsEntityVisible);
 	rtSym("DestroyEntity%entity", sgd_DestroyEntity);
 	rtSym("%CopyEntity%entity", sgd_CopyEntity);
 	rtSym("ResetEntity%entity", sgd_ResetEntity);
-	rtSym("SetEntityName", sgd_SetEntityName);
-	rtSym("$GetEntityName", getEntityName);
+	rtSym("SetEntityName%entity$name", sgd_SetEntityName);
+	rtSym("$GetEntityName%entity", getEntityName);
 	rtSym("SetEntityParent%entity%parent", sgd_SetEntityParent);
 	rtSym("%GetEntityParent%entity", sgd_GetEntityParent);
 	rtSym("%GetEntityChildCount%entity", sgd_GetEntityChildCount);
@@ -488,8 +513,11 @@ bool sgd_link(void (*rtSym)(const char *sym, void *pc)) {
 
 	// Render effects
 	rtSym("%CreateBloomEffect", sgd_CreateBloomEffect);
+	rtSym("SetBloomEffectRadius%effect%radius", sgd_SetBloomEffectRadius);
+	rtSym("%GetBloomEffectRadius%effect", sgd_GetBloomEffectRadius);
 	rtSym("%CreateBlurEffect", sgd_CreateBlurEffect);
 	rtSym("SetBlurEffectRadius%effect%radius", sgd_SetBlurEffectRadius);
+	rtSym("%GetBlurEffectRadius%effect", sgd_GetBlurEffectRadius);
 	rtSym("%CreateMonocolorEffect", sgd_CreateMonocolorEffect);
 	rtSym("SetMonocolorEffectColor%effect#red#green#blue#alpha", sgd_SetMonocolorEffectColor);
 	rtSym("%CreateFogEffect", sgd_CreateFogEffect);
@@ -497,7 +525,7 @@ bool sgd_link(void (*rtSym)(const char *sym, void *pc)) {
 	rtSym("SetFogEffectRange%effect#near#far", sgd_SetFogEffectRange);
 	rtSym("SetFogEffectPower%effect#power", sgd_SetFogEffectPower);
 	rtSym("SetRenderEffectEnabled%effect%enabled", sgd_SetRenderEffectEnabled);
-	rtSym("%IsRenderEffectEnabled%effect%enabled", sgd_IsRenderEffectEnabled);
+	rtSym("%IsRenderEffectEnabled%effect", sgd_IsRenderEffectEnabled);
 
 	return true;
 }

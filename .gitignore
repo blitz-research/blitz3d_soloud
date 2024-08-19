@@ -1,7 +1,15 @@
-*.exe
-*.dll
 .idea
 cmake-build-*
 Blitz3D-V*
-BLITZ3D_RELEASES
 
+BLITZ3D_INSTALL/Blitz3D.exe
+BLITZ3D_INSTALL/runtime.dll
+BLITZ3D_INSTALL/bin/blitzcc.exe
+BLITZ3D_INSTALL/bin/debugger.dll
+BLITZ3D_INSTALL/bin/ide.exe
+BLITZ3D_INSTALL/bin/linker.dll
+BLITZ3D_INSTALL/bin/runtime.dll
+BLITZ3D_INSTALL/cfg/blitzide.prefs
+BLITZ3D_INSTALL/tmp/*.bb
+
+BLITZ3D_RELEASES

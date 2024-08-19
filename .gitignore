@@ -3,7 +3,6 @@ cmake-build-*
 Blitz3D-V*
 
 BLITZ3D_INSTALL/Blitz3D.exe
-BLITZ3D_INSTALL/runtime.dll
 BLITZ3D_INSTALL/bin/blitzcc.exe
 BLITZ3D_INSTALL/bin/debugger.dll
 BLITZ3D_INSTALL/bin/ide.exe

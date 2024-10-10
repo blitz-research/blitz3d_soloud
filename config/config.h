@@ -2,7 +2,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define BASE_VERSION 1117
+#define BASE_VERSION 1118
 
 #if BB_LIBSGD_ENABLED
 #define VERSION (0x30000 | BASE_VERSION)

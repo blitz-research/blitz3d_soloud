@@ -1,7 +1,13 @@
 
+***** V1.119 *****
+
+Merged FP bug fix.
+
+
 ***** V1.118 *****
 
-Added ':Int', ':Float' and ':String' as aliased for '%', '#' and '$' to modern dialect.
+Added ':Int', ':Float' and ':String' as aliases for '%', '#' and '$' to modern dialect. Note: these are only avail for use with explicit Local
+or Global variable declarations.
 
 Fixed ':' statement separator in modern dialect with sequences of single identifier statements, eg: 'UpdateWorld:RenderScene:Preset'
 

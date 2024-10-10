@@ -73,7 +73,9 @@ StmtSeqNode *Parser::parseStmtSeq( int scope ){
 	Dialect prevDialect = dialect;
 
 	if( scope == STMTS_PROG) {
+
 		while (toker->curr() == '\n') toker->next();
+
 		if(toker->curr()==DIALECT) {
 			if( toker->next()!=STRINGCONST ) exp( "dialect identifier" );
 			string name=toker->text();toker->next();
@@ -148,7 +150,24 @@ void Parser::parseStmtSeq( StmtSeqNode *stmts,int scope ){
 		case IDENT:
 			{
 				string ident=toker->text();
-				toker->next();string tag=parseTypeTag();
+				toker->next();
+
+//				string tag=parseTypeTag();
+				string tag;
+				if(dialect==DIALECT_MODERN) {
+					// Special case hack to allow usage of ':' as statement separator in situations such as 'Function1:Function2'.
+					if(toker->curr()==':'){
+						if(toker->lookAhead(1) == IDENT && toker->lookAhead(2) == '=') {
+							toker->next();
+							tag = parseIdent();
+						}
+					}else{
+						tag=parseTypeTag();
+					}
+				}else{
+					tag=parseTypeTag();
+				}
+
 				bool isDot = (dialect==DIALECT_MODERN && toker->curr()=='.') || (dialect!=DIALECT_MODERN && toker->curr()=='\\');
 				if( arrayDecls.find(ident)==arrayDecls.end() && toker->curr()!='=' && !isDot && toker->curr()!='[' ){
 					//must be a function
@@ -392,8 +411,18 @@ string Parser::parseTypeTag(){
 	case '%':toker->next();return "%";
 	case '#':toker->next();return "#";
 	case '$':toker->next();return "$";
+	case ':':
+		if(dialect!=DIALECT_MODERN) break;
+		toker->next();
+		if(toker->curr()==BBINT) {toker->next();return "%";}
+		if(toker->curr()==BBFLOAT) {toker->next();return "#";}
+		if(toker->curr()==BBSTR) {toker->next();return "$";}
+		return parseIdent();
+	case '.':
+		if(dialect==DIALECT_MODERN) break;
+		toker->next();
+		return parseIdent();
 	}
-	if((dialect==DIALECT_MODERN && toker->curr()==':') || (dialect!=DIALECT_MODERN && toker->curr()=='.')) {toker->next();return parseIdent();}
 	return "";
 }
 

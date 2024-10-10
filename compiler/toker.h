@@ -56,6 +56,7 @@ private:
 	vector<Toke> tokes;
 	void nextline();
 	int curr_row,curr_toke;
+	int rem_nest;
 };
 
 #endif

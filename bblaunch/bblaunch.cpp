@@ -1,8 +1,8 @@
 
-#include <string>
+//#include <string>
 #include <windows.h>
 
-using namespace std;
+//using namespace std;
 
 static const char *bb_err=
 "Unable to run Blitz Basic";
@@ -11,7 +11,8 @@ static const char *md_err=
 "Your desktop must be in high-colour mode to use Blitz Basic.\n\n"
 "You can change your display settings from the control panel."; 
 
-static string getAppDir(){
+// Avoiding the use of the <string> class reduces the size of the executable.
+/*static string getAppDir(){
     char buff[MAX_PATH];
     if( GetModuleFileName( 0,buff,MAX_PATH ) ){
             string t=buff;
@@ -20,6 +21,15 @@ static string getAppDir(){
             return t;
     }
     return "";
+}*/
+
+static void getAppDir(char* buff, int buffSize) {
+    if (GetModuleFileName(0, buff, buffSize)) {
+        char* p = strrchr(buff, '\\');
+        if (p != NULL) {
+            *(p) = '\0'; // truncate the string at the last backslash
+        }
+    }
 }
 
 static void fail( const char *p ){
@@ -37,15 +47,27 @@ int _stdcall WinMain( HINSTANCE inst,HINSTANCE prev,char *cmd,int show ){
     if( desktopDepth()<16 ) fail( md_err );
 
     //Ugly hack to get application dir...
-    string t=getAppDir();
+    /*string t=getAppDir();
     putenv( ("blitzpath="+t).c_str() );
     SetCurrentDirectory( t.c_str() );
-    t=t+"\\bin\\ide.exe "+cmd;
+    t=t+"\\bin\\ide.exe "+cmd;*/
+
+    char t[MAX_PATH];
+    getAppDir(t, MAX_PATH);
+
+    char envVar[MAX_PATH];
+    strcpy(envVar, "blitzpath=");
+    strcat(envVar, t);
+    putenv(envVar);
+    SetCurrentDirectory(t);
+
+    strcat(t, "\\bin\\ide.exe ");
+    strcat(t, cmd);
 
     STARTUPINFO si;
     PROCESS_INFORMATION pi;
     ZeroMemory(&si,sizeof(si));si.cb=sizeof(si);
-	if( !CreateProcess( 0,(char*)t.c_str(),0,0,0,0,0,0,&si,&pi ) ){
+	if( !CreateProcess( 0,t,0,0,0,0,0,0,&si,&pi ) ){
 		::MessageBox( 0,bb_err,"Blitz Basic Error",MB_SETFOREGROUND|MB_TOPMOST|MB_ICONERROR );
 		ExitProcess(-1);
 	}

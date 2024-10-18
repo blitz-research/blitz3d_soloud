@@ -31,7 +31,7 @@ Assem_x86::Assem_x86( istream &in,Module *mod ):Assem(in,mod){
 	}
 }
 
-// Determines the last 4 opcode bits for: jCC, cmovCC, setCC, fcmovCC
+// Determines the last 4 opcode bits for jCC, cmovCC, setCC instructions.
 static int findCC( const string &s ){
 	if( s=="o"  ) return 0;                         // OF=1
 	if( s=="no" ) return 1;                         // OF=0

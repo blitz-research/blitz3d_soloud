@@ -1,7 +1,6 @@
 
 #include "std.h"
 
-#include "bbblitz3d.h"
 #include "bbgraphics.h"
 #include "../blitz3d/blitz3d.h"
 #include "../blitz3d/world.h"
@@ -21,6 +20,7 @@
 #include "../blitz3d/terrain.h"
 #include "../blitz3d/listener.h"
 #include "../blitz3d/cachedtexture.h"
+#include "bbblitz3d.h"
 
 gxScene *gx_scene;
 extern gxFileSystem *gx_filesys;

@@ -31,23 +31,24 @@ Assem_x86::Assem_x86( istream &in,Module *mod ):Assem(in,mod){
 	}
 }
 
+// Determines the last 4 opcode bits for jCC, cmovCC, setCC instructions.
 static int findCC( const string &s ){
-	if( s=="o" ) return 0;
-	if( s=="no" ) return 1;
-	if( s=="b"||s=="c"||s=="nae" ) return 2;
-	if( s=="ae"||s=="nb"||s=="nc" ) return 3;
-	if( s=="e"||s=="z" ) return 4;
-	if( s=="ne"||s=="nz" ) return 5;
-	if( s=="be"||s=="na" ) return 6;
-	if( s=="a"||s=="nbe" ) return 7;
-	if( s=="s" ) return 8;
-	if( s=="ns" ) return 9;
-	if( s=="p"||s=="pe" ) return 10;
-	if( s=="ne"||s=="po" ) return 11;
-	if( s=="l"||s=="nge" ) return 12;
-	if( s=="ge"||s=="nl" ) return 13;
-	if( s=="le"||s=="ng" ) return 14;
-	if( s=="g"||s=="nle" ) return 15;
+	if( s=="o"  ) return 0;                         // OF=1
+	if( s=="no" ) return 1;                         // OF=0
+	if( s=="b"  || s=="c"  || s=="nae" ) return 2;  // CF=1
+	if( s=="ae" || s=="nb" || s=="nc"  ) return 3;  // CF=0
+	if( s=="e"  || s=="z"   ) return 4;             // ZF=1
+	if( s=="ne" || s=="nz"  ) return 5;             // ZF=0
+	if( s=="be" || s=="na"  ) return 6;             // CF=1 or ZF=1
+	if( s=="a"  || s=="nbe" ) return 7;             // CF=0 and ZF=0
+	if( s=="s"  ) return 8;                         // SF=1
+	if( s=="ns" ) return 9;                         // SF=0
+	if( s=="p"  || s=="pe"  ) return 10;            // PF=1
+	if( s=="np" || s=="po"  ) return 11;            // PF=0
+	if( s=="l"  || s=="nge" ) return 12;            // SF<>OF
+	if( s=="ge" || s=="nl"  ) return 13;            // SF=OF
+	if( s=="le" || s=="ng"  ) return 14;            // ZF=1 or SF<>OF
+	if( s=="g"  || s=="nle" ) return 15;            // ZF=0 and SF=OF
 	return -1;
 }
 
